@@ -30,7 +30,7 @@ Personal API
 
 - **Contact & Contract**: Once the user has found a user that offers the request service, they can contact by email. At this moment, a contract is generated with status 'Pending'. If user accept to make the job, contract changes to 'Accepted', and when finish, to 'Finished'.
 
-- **When service is finished** user has the option to value the service, this way users can get TC(time-coins) and can improve their position in the ranking.
+- **When service is finished** user has the option to value the service, this way users can get TC(time-coins) and can improve their position in the rate.
 
 ## DEVELOPER: Mario Montalbán
 
@@ -38,3 +38,7 @@ Personal API
 
 ## PLANNING:
 - [TRELLO BOARD](https://trello.com/b/1Gl3tS01/time-bank)
+
+## PROJECT
+
+- [TIME-BANK FINAL PROJECT](http://time-bank.surge.sh/)
