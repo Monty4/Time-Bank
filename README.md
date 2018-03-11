@@ -20,9 +20,9 @@ Personal API
 - REACT
 - REACT-ROUTER
 
-## FLOW
-
 ## COMPONENTS
+
+## FLOW
 
 - **Regiter**: User must be registered to be able to access.
 
