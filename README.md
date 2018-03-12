@@ -19,6 +19,8 @@ Personal API
 - CSS FRAMEWORK: BOOTSRAP 4
 - REACT
 - REACT-ROUTER
+- MongoDB
+- Jasmine
 
 ## COMPONENTS
 
