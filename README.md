@@ -9,6 +9,7 @@ The project consists of a place where users can share their time with other user
 
 - [DATA MODEL](docs/DataModel.png)
 - [MOCKUP](docs/Mockup.png)
+- [USE CASES](docs/UseCases.png)
 
 ## API
 
