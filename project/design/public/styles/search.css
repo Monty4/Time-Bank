@@ -1,0 +1,61 @@
+header {
+    background-color:rgb(24, 153, 175);
+    height: 60px;
+    padding-left: 50px;
+}
+
+.section {
+    text-align: left;
+    color: brown;
+}
+
+.title {
+    text-align: center;
+    color: brown;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card {
+    padding: 10px;
+}
+
+.field {
+    margin-top: 5px;
+    height: 35px;
+
+}
+
+.button {
+    margin-top: 5px;
+    text-align: right;
+}
+
+.btn-outline-secondary {
+    color: brown;
+}
+
+a {
+    color: white;
+}
+
+.img {
+    /* text-align: center; */
+    float: left;
+    margin-bottom: 20px;
+    
+}
+
+.username {
+    width: 200px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.nav {
+    margin-left: 200px;
+}
+
+.pagination.pagination-sm {
+    padding-left: 60px;
+}
