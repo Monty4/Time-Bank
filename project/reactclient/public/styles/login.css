@@ -1,0 +1,28 @@
+.header {
+    background-color:rgb(245, 209, 142);
+    height: 60px;
+}
+
+.section {
+    text-align: left;
+    color: brown;
+}
+
+.card {
+    padding: 10px;
+}
+
+.field {
+    margin-top: 5px;
+    height: 35px;
+
+}
+
+.button {
+    margin-top: 5px;
+    text-align: right;
+}
+
+.btn-outline-secondary {
+    color: brown;
+}

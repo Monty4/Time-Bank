@@ -16,6 +16,7 @@
     "express": "^4.16.3",
     "logic": "0.0.3",
     "mongoose": "^5.0.10",
+    "request-promise": "^4.2.2",
     "routes": "^2.1.0",
     "uuid": "^3.2.1"
   },

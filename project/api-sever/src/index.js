@@ -12,7 +12,7 @@ const database = process.env.MONGO_DB
 mongoose.connect(`mongodb://${host}:${port}/${database}`)
     .then(() => {
         const app = express()
-
+        app.use(cors())
         app.use('/', routes)
 
         const port = process.env.PORT
