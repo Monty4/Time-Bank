@@ -13,7 +13,7 @@ mongoose.connect(`mongodb://${host}:${port}/${database}`)
     .then(() => {
         const app = express()
         app.use(cors())
-        app.use('/', routes)
+        app.use('/api', routes)
 
         const port = process.env.PORT
         app.listen(port, () => console.log(`Api Server running on port ${port}`))

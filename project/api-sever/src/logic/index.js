@@ -54,15 +54,15 @@ module.exports = {
             })
     },
 
-    retrieve(id) {
+    retrieve(_id) {
         return Promise.resolve()
             .then(() => {
-                validate({ id })
-
+                validate({ _id })
                 //return User.findOne({ id }, 'id name surname email username') // WARN! it returns _id too!
-                return User.findOne({ id }, { _id: 0, password: 0 })
+                return User.findOne({ _id }, { _id: 0, password: 0 })
             })
             .then(user => {
+                console.log(user)
                 if (!user) throw Error('user does not exist')
 
                 return user

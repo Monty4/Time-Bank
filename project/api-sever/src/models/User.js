@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const User = mongoose.model('users', {
-    _id: String,
     name: String,
     surname: String,
     username: String,

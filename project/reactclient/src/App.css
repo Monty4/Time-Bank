@@ -27,7 +27,9 @@
   to { transform: rotate(360deg); }
 }
 
-
+body {
+  background-color: #E5FCC2;
+}
 
 .bg-light {
   background-color: #1899AF!important;
@@ -35,11 +37,22 @@
 
 .user {
   /* background-color: #1899AF; */
-  background-color: lightgoldenrodyellow;
+  background-color: #9DE0AD;
   margin-bottom: 10px;
 }
 
-/* .pagination.pagination-sm {
-  padding-left: 50%;
-  padding-right: 50%;
-} */
+.progress-bar {
+  background-color: #45ADA8;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #45ADA8;
+  color: white;
+  border-color: #547980;
+}
+
+.searchField {
+  background-color: #E5FCC2;
+  padding: 0px;
+}

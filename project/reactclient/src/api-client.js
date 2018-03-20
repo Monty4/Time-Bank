@@ -1,14 +1,22 @@
+import api from 'api-client'
+api.port=5000
+api.host='localhost'
+api.protocol='http'
+
 let api_client;
 
 (function () {
 
-    const axios = require('axios')
-    const baseUrl = 'http://localhost:5000'
+    //const baseUrl = 'https://sheltered-stream-44715.herokuapp.com'
 
     api_client = {
         
         getList(){
-            return axios.get(`${baseUrl}/`).then(res => res.data.data)
+            return  api.list().then(data => data.data)
+        },
+
+        getUser(id){
+            return api.retrieve(id).then(data => data.data)
         }
     }
 })()
