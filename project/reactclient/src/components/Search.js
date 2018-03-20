@@ -22,20 +22,20 @@ class Search extends Component {
               <div className="col-12">
                 <div className="card searchField">
                   <div className="card-body">
-                    <form>
+                    <form method="post">
                       <div className="row">
                         <div className="col-sm-12 col-md-3 field">
-                          <input type="text" placeholder="service" size="20" />
+                          <input type="text" placeholder="service" size="25" />
                         </div>
                         <div className="col-sm-12 col-md-3">
                         </div>
                         <div className="col-sm-12 col-md-3" />
                         <div className="col-sm-12 col-md-3" />
                         <div className="col-sm-12 col-md-3 field">
-                          <input type="text" placeholder="city" size="20" />
+                          <input type="text" placeholder="city" size="25" />
                         </div>
                         <div className="col-sm-12 col-md-3 field">
-                          <input type="text" placeholder="borrough" size="20" />
+                          <input type="text" placeholder="borrough" size="25" />
                         </div>
                         <div className="col-sm-12 col-md-3">
                           <input type="submit" defaultValue="Search" className="btn btn-outline-secondary" />

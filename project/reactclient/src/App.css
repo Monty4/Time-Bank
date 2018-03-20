@@ -56,3 +56,8 @@ body {
   background-color: #E5FCC2;
   padding: 0px;
 }
+
+#logo {
+  padding-left: 100px;
+  padding-right: 100px;
+}

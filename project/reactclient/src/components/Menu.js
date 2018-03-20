@@ -7,7 +7,7 @@ function Menu() {
     return (
         <nav className="navbar navbar-expand-sm navbar-light bg-light">
           <div>
-            <img src="images/LogoBlue.png" />
+            <img src="images/LogoBlue.png" id="logo" />
           </div>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" ></span>
@@ -21,7 +21,7 @@ function Menu() {
                 <NavLink className="nav-link" to="/search">Search</NavLink>
               </li>
               <li className=" nav-item active">
-                <a className="nav-link" href="#!">login</a>
+              <NavLink className="nav-link" to="/login">Login</NavLink>
               </li>
             </ul>
         </div>

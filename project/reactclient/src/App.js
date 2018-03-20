@@ -5,7 +5,7 @@ import './App.css'
 import Menu from './components/Menu'
 import Search from './components/Search'
 import Datauser from './components/Datauser'
-import Home from './components/Home'
+import Login from './components/Login'
 import api_client from './api-client.js'
 
 
@@ -18,6 +18,7 @@ class TimebankApp extends Component {
       users: [],
       userID: '',
       userName: '',
+      userPassword: '',
       userSurname: '',
       userCity: '',
       userBorrough: ''
@@ -36,6 +37,10 @@ class TimebankApp extends Component {
     })
   }
 
+  setFormFields = () => {
+
+  }
+
   componentWillMount() {
   
     api_client.getList().then(users => {
@@ -52,8 +57,8 @@ class TimebankApp extends Component {
             <Menu />
           )} />
 
-          <Route path="/home" render={() => (
-            <Home />
+          <Route path="/login" render={() => (
+            <Login setFormFields={this.setFormFields} />
           )} />
 
           <Route path="/search" render={() => (
