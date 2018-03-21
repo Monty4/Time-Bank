@@ -11,7 +11,10 @@ class Search extends Component {
     super(props)
 
     this.state={
-      services: []
+      services: [],
+      service: '',
+      city: '',
+      borrough: ''
     }
   }
 
