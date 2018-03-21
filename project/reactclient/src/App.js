@@ -25,20 +25,22 @@ class TimebankApp extends Component {
     }
   }
 
-  setUserId = (setUserID) => {
+  setUserId = (userID) => {
     this.setState({
-      userID: setUserID
+      userID
     })
   }
 
-  setUserName = (setUserName) => {
+  setUserName = (userName) => {
     this.setState({
-      userName: setUserName
+      userName
     })
   }
 
-  setFormFields = () => {
-
+  setFormFields = (userName) => {
+    this.setState({
+      userName
+    })
   }
 
   componentWillMount() {
@@ -46,6 +48,8 @@ class TimebankApp extends Component {
     api_client.getList().then(users => {
       this.setState({ users})
     })
+
+    
   }
 
   render() {

@@ -14,6 +14,7 @@ class Datauser extends Component {
 
     componentWillMount() {
         api_client.getUser(this.props.id).then(user => {
+            console.log('user->', user)
             this.setState({user})
         })
       }

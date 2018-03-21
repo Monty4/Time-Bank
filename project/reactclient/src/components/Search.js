@@ -9,7 +9,21 @@ import List from './List'
 class Search extends Component {
   constructor(props) {
     super(props)
+
+    this.state={
+      services: []
+    }
   }
+
+  componentWillMount() {
+  
+    api_client.getServices().then(services => {
+      console.log(services)
+      this.setState({ services })
+    })
+    
+  }
+  
 
   render() {
     return (
@@ -25,7 +39,13 @@ class Search extends Component {
                     <form method="post">
                       <div className="row">
                         <div className="col-sm-12 col-md-3 field">
-                          <input type="text" placeholder="service" size="25" />
+                          <select>
+                          {
+                            this.state.services.map(service => {
+                              return <option className="field" value={service._id}>{service.title}</option>
+                            })
+                          }
+                          </select>
                         </div>
                         <div className="col-sm-12 col-md-3">
                         </div>
