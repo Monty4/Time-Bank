@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import api from 'api-client'
+import { Redirect } from 'react-router'
+import api_client from '../api-client'
 
 import '../App.css'
 import '../login.css'
@@ -16,7 +17,8 @@ class Register extends Component {
       service: [],
       city: '',
       borough: '',
-      email: ''
+      email: '',
+      services: []
     }
   }
 
@@ -53,16 +55,22 @@ class Register extends Component {
   }
 
   submit = () => {
-    api.register(
+    api_client.registerUser(
       this.state.name,
       this.state.surname,
       this.state.username,
       this.state.password,
-      this.state.service,
+      [this.state.service],
       this.state.city,
       this.state.borough,
       this.state.email
     )
+  }
+
+  componentWillMount() {
+    api_client.getServices().then(services => {
+      this.setState({ services })
+    })
   }
 
   render() {
@@ -84,7 +92,14 @@ class Register extends Component {
                     <label htmlFor="psw">Password</label>
                     <input type="password" placeholder="Enter Password" name="psw" className="formText" onChange={this.fillPassword} required />
                     <label htmlFor="uname">Service</label>
-                    <input type="text" placeholder="Enter Service" name="uname" className="formText" onChange={this.fillService} required />
+                    <select onChange={this.fillService} className="formText">
+                      <option className="field" value="">Select Service</option>
+                      {
+                        this.state.services.map(service => {
+                          return <option className="field" key={service._id} value={service._id}>{service.title}</option>
+                        })
+                      }
+                    </select>
                     <label htmlFor="uname">City</label>
                     <input type="text" placeholder="Enter City" name="uname" className="formText" onChange={this.fillCity} required />
                     <label htmlFor="uname">Borough</label>

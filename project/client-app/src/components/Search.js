@@ -61,7 +61,7 @@ class Search extends Component {
                       <div className="row">
                         <div className="col-sm-12 col-md-3 field">
                           <select onChange={this.fillService}>
-                          <option className="field">Select Service</option>
+                          <option className="field" value="">Select Service</option>
                           {
                             this.state.services.map(service => {
                               return <option className="field" value={service._id}>{service.title}</option>

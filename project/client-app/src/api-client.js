@@ -21,6 +21,11 @@ let api_client;
 
         getServices(){
             return api.services().then(data => data.data)
+        },
+
+        registerUser(name, surname, username, password, services, city, borough, email){
+            
+            return api.register(name, surname, username, password, services, city, borough, email).then(data => data.data)
         }
     }
 })()

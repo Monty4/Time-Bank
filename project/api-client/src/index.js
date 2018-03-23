@@ -2,9 +2,9 @@ const rp = require('request-promise')
 
 const api = {
     _baseUrl() {
-        with (this) {
-            return `${protocol}://${host}:${port}/api`
-        }
+       
+            return `${this.protocol}://${this.host}:${this.port}/api`
+
     },
 
     _call(method, path, body, qs) {
@@ -21,8 +21,8 @@ const api = {
         return this._call('get', 'users', undefined, { service, city, borough })
     },
 
-    register(name, surname, username, password, city, borough, email) {
-        return this._call('post', 'register', { name, surname, username, password, services, city, borrough, email })
+    register(name, surname, username, password, services, city, borough, email) {
+        return this._call('post', 'register', { name, surname, username, password, services, city, borough, email })
     },
 
     remove(id, username, password) {

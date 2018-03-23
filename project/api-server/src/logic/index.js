@@ -21,6 +21,7 @@ function validateStringArrayProp(prop, arr) {
 }
 
 const logic = {
+    // New User
     registerUser(name, surname, username, password, city, borough, email, serviceIds) {
         return Promise.resolve()
             .then(() => {
@@ -50,6 +51,7 @@ const logic = {
             .then(user => user._id.toString())
     },
 
+    // List Filtered Users by Service, city and Borough
     listUsers(service, city, borough) {
         let filter = {}
        
@@ -61,6 +63,7 @@ const logic = {
         })
     },
 
+    // Update User by ID
     updateUser(_id, name, surname, username, newUsername, password, newPassword, city, borough, email) {
         console.log(_id)
         return Promise.resolve()
@@ -77,7 +80,7 @@ const logic = {
 
                 return User.findOne({ _id })
             })
-            .then(user => {
+            .then(user => {a
                 console.log('user to modify -> ',user)
                 if (!user) throw Error('user does not exists')
 
@@ -88,6 +91,7 @@ const logic = {
             })
     },
 
+    // Retrieve User by ID
     retrieveUser(_id) {
         return Promise.resolve()
             .then(() => {
@@ -107,9 +111,34 @@ const logic = {
         // TODO
     },
 
+    // List Services Array
     listServices() {
         return Service.find()
     },
+
+
+
+
+
+
+
+
+    // New Contract
+    registerContract(service, server, client) {
+        return Promise.resolve()
+            .then(_contract => {
+
+                const contract = new Contract({ service, server, client })
+
+                return contract.save()
+            })
+            
+    },
+
+
+
+
+    
 
     listContractsServed(serverId) {
         // TODO

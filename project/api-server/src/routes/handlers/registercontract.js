@@ -3,9 +3,11 @@ const logic = require('../../logic')
 
 module.exports = (req,res) => {
 
-    const {name, surname, username, password, city, borough, email, services} = req.body
+    const {service, server, client} = req.body
     
-    logic.registerUser(name, surname, username, password, city, borough, email, services)
+
+    logic.registerContract(service, server, client )
+
 
     .then(users => res.json(success(users)))
     .catch(err => res.json(fail(err)))

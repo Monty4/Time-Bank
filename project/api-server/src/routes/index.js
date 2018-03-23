@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const bodyParser = require('body-parser')
-const { list, retrieve, register, services, update } = require('./handlers')
+const { list, retrieve, register, services, update, registercontract } = require('./handlers')
 
 const router = Router()
 
@@ -11,5 +11,7 @@ router.post('/register', jsonBodyParser, register)
 router.post('/updateuser', jsonBodyParser, update)
 
 router.get('/services', services)
+
+router.post('/registercontract', jsonBodyParser, registercontract)
 
 module.exports = router
