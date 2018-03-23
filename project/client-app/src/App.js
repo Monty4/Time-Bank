@@ -5,7 +5,7 @@ import './App.css'
 import Menu from './components/Menu'
 import Search from './components/Search'
 import Datauser from './components/Datauser'
-import Login from './components/Login'
+import Register from './components/Register'
 import api_client from './api-client.js'
 
 
@@ -48,8 +48,10 @@ class TimebankApp extends Component {
     api_client.getList().then(users => {
       this.setState({ users})
     })
+}
 
-    
+  getFilteredUsers = (users) => {
+    this.setState({users})
   }
 
   render() {
@@ -61,12 +63,12 @@ class TimebankApp extends Component {
             <Menu />
           )} />
 
-          <Route path="/login" render={() => (
-            <Login setFormFields={this.setFormFields} />
+          <Route path="/register" render={() => (
+            <Register setFormFields={this.setFormFields} />
           )} />
 
           <Route path="/search" render={() => (
-            <Search users={this.state.users} onClickUserId={this.setUserId} onClickUserName={this.setUserName} />
+            <Search getList={this.getFilteredUsers} users={this.state.users} onClickUserId={this.setUserId} onClickUserName={this.setUserName} />
           )} />
 
           <Route path="/datauser" render={() => (

@@ -6,9 +6,8 @@ const router = Router()
 
 router.get('/users', list)
 router.get('/user/:id', retrieve)
-router.post('/register', register)
+const jsonBodyParser = bodyParser.json()
+router.post('/register',jsonBodyParser, register)
 router.get('/services', services)
-
-// const jsonBodyParser = bodyParser.json()
 
 module.exports = router

@@ -4,7 +4,7 @@ import api from 'api-client'
 import '../App.css'
 import '../login.css'
 
-class Login extends Component {
+class Register extends Component {
   constructor() {
     super()
     
@@ -13,8 +13,9 @@ class Login extends Component {
       surname: '',
       username: '',
       password: '',
+      service: [],
       city: '',
-      borrough: '',
+      borough: '',
       email: ''
     }
   }
@@ -35,12 +36,16 @@ class Login extends Component {
     this.setState({ password: event.target.value})
   }
 
+  fillService = (event) => {
+    this.setState({ service: event.target.value})
+  }
+
   fillCity = (event) => {
     this.setState({ city: event.target.value})
   }
 
-  fillBorrough = (event) => {
-    this.setState({ borrough: event.target.value})
+  fillBorough = (event) => {
+    this.setState({ borough: event.target.value})
   }
 
   fillEmail = (event) => {
@@ -53,8 +58,9 @@ class Login extends Component {
       this.state.surname,
       this.state.username,
       this.state.password,
+      this.state.service,
       this.state.city,
-      this.state.borrough,
+      this.state.borough,
       this.state.email
     )
   }
@@ -77,13 +83,15 @@ class Login extends Component {
                     <input type="text" placeholder="Enter Username" name="uname" className="formText" onChange={this.fillUsername} required />
                     <label htmlFor="psw">Password</label>
                     <input type="password" placeholder="Enter Password" name="psw" className="formText" onChange={this.fillPassword} required />
+                    <label htmlFor="uname">Service</label>
+                    <input type="text" placeholder="Enter Service" name="uname" className="formText" onChange={this.fillService} required />
                     <label htmlFor="uname">City</label>
                     <input type="text" placeholder="Enter City" name="uname" className="formText" onChange={this.fillCity} required />
-                    <label htmlFor="uname">Borrough</label>
-                    <input type="text" placeholder="Enter Borrough" name="uname" className="formText" onChange={this.fillBorrough } required />
+                    <label htmlFor="uname">Borough</label>
+                    <input type="text" placeholder="Enter Borough" name="uname" className="formText" onChange={this.fillBorough } required />
                     <label htmlFor="uname">email</label>
                     <input type="text" placeholder="Enter email" name="uname" className="formText" onChange={this.fillEmail} required />
-                    <button type="submit" className="btn btn-primary">Login</button>
+                    <button type="submit" className="btn btn-primary">Register</button>
                   </div>
                 </div>
               </form>
@@ -95,4 +103,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default Register

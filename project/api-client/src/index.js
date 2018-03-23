@@ -3,26 +3,26 @@ const rp = require('request-promise')
 const api = {
     _baseUrl() {
         with (this) {
-            console.log(this)
             return `${protocol}://${host}:${port}/api`
         }
     },
 
-    _call(method, path, body) {
+    _call(method, path, body, qs) {
         return rp({
             method,
             uri: `${this._baseUrl()}/${path}`,
             body,
+            qs,
             json: true
         })
     },
 
-    list() {
-        return this._call('get', 'users')
+    list(service, city, borough) {
+        return this._call('get', 'users', undefined, { service, city, borough })
     },
 
-    register(name, surname, username, password, city, borrough, email) {
-        return this._call('post', 'register', { name, surname, username, password, city, borrough, email })
+    register(name, surname, username, password, city, borough, email) {
+        return this._call('post', 'register', { name, surname, username, password, services, city, borrough, email })
     },
 
     remove(id, username, password) {
@@ -37,7 +37,7 @@ const api = {
         return this._call('put', `user/${id}`, { name, surname, email, newUsername, newPassword, username, password })
     },
 
-    services(){
+    services() {
         return this._call('get', 'services')
     }
 }

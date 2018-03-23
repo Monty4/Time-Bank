@@ -14,7 +14,6 @@ class Datauser extends Component {
 
     componentWillMount() {
         api_client.getUser(this.props.id).then(user => {
-            console.log('user->', user)
             this.setState({user})
         })
       }
@@ -41,13 +40,15 @@ class Datauser extends Component {
                                             <h6><strong>City:</strong> {this.state.user.city}</h6>
                                             </div>
                                             <div className="col-sm-12 col-md-3">
-                                            <h6><strong>Borrough:</strong> {this.state.user.borrough}</h6>
+                                            <h6><strong>Borrough:</strong> {this.state.user.borough}</h6>
                                             </div>
                                             <div className="col-sm-12 col-md-3" />
-                                            {
+                                            {(this.state.user.comments) ?
                                                 this.state.user.comments.map(user => {
                                                     return <Comments user={user} />
                                                 })
+
+                                                :undefined
                                             }
                                             <div className="col-12 field">
                                                 <input type="submit" defaultValue="Contract" className="btn btn-outline-secondary" />

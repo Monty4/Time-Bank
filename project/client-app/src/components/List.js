@@ -22,7 +22,7 @@ class List extends Component {
           <div className="card-body">
             <h6 className="card-title">{this.props.user.name} {this.props.user.surname}</h6>
             <div className="progress">
-            <div className="progress-bar" role="progressbar" style={{ width: `${this.props.user.value}%` }} aria-valuenow={25} aria-valuemin={0} aria-valuemax={100}>{this.props.user.value}%</div>
+            <div className="progress-bar" role="progressbar" style={{ width: `${this.props.user.valuation}%` }} aria-valuenow={25} aria-valuemin={0} aria-valuemax={100}>{this.props.user.valuation}%</div>
             </div>
             <p />
             <NavLink className="btn btn-primary" to="/datauser" onClick={()=>{this.sendUserID(`${this.props.user._id}`); this.sendUserName(`${this.props.user.name}`)}}>View more</NavLink>

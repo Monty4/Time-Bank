@@ -11,17 +11,13 @@ let api_client;
 
     api_client = {
         
-        getList(){
-            return  api.list().then(data => data.data)
+        getList(service, city, borough){
+            return  api.list(service, city, borough).then(data => data.data)
         },
 
         getUser(id){
             return api.retrieve(id).then(data => data.data)
         },
-
-        // register(name, surname, username, password, city, borrough, email){
-        //     return api.register(name, surname, username, password, city, borrough, email).then(data => data.data)
-        // }
 
         getServices(){
             return api.services().then(data => data.data)

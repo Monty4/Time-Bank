@@ -1,86 +1,133 @@
-const User = require('../models/User')
-const Service = require('../models/Service')
-const validate = require('./validate')
-const uuid = require('uuid/v4')
+const { User, Service, Contract, Review } = require('../models')
+// const mongoose = require('mongoose')
 
+function validateStringProp(prop, value) {
+    if (typeof value === 'undefined' || !value.trim().length) throw Error(`${prop} cannot be undefined or empty`)
+}
+
+function validateStringProps(obj) {
+    for (const prop in obj) {
+        const value = obj[prop]
+
+        validateStringProp(prop, value)
+    }
+}
+
+function validateStringArrayProp(prop, arr) {
+    if (typeof arr === 'undefined' || !arr.length) throw Error(`${prop} cannot be undefined or empty`)
+
+    for (let i = 0; i < arr.length; i++)
+        validateStringProp(`${prop}[${i}]`, arr[i])
+}
 
 const logic = {
-    register(name, surname, username, password, city, borrough, email) {
+    registerUser(name, surname, username, password, city, borough, email, serviceIds) {
         return Promise.resolve()
-        .then(() => {
-            validate({ name, surname, username, password, city, borrough, email })
+            .then(() => {
+                validateStringProps({ name, surname, username, password, city, borough, email })
+                validateStringArrayProp('serviceIds', serviceIds)
 
-            return User.findOne({ username })
-        })
-        .then(user => {
-            if (user) throw Error('username already exists')
+                return User.findOne({ username })
+            })
+            .then(user => {
+                if (user) throw Error('username already exists')
 
-            const id = uuid()
+                return Service.find({ _id: { $in: serviceIds } })
+            })
+            .then(_services => {
+                if (!_services || _services.length !== serviceIds.length)
+                    throw Error(`service ids are not valid ${serviceIds}`)
 
-            return User.create({ id, name, surname, username, password, city, borrough, email })
-                .then(() => id)
-        })
+                const services = []
+
+                for (service of _services)
+                    services.push(service._id)
+
+                const user = new User({ name, surname, username, password, city, borough, email, services })
+
+                return user.save()
+            })
+            .then(user => user._id.toString())
     },
 
-    list() {
-        return User.find({})
+    listUsers(service, city, borough) {
+        let filter = {}
+       
+        if (service) filter.services = service
+        if (city) filter.city = { $regex: new RegExp(city, 'i') }
+        if (borough) filter.borough = { $regex: new RegExp(borough, 'i') }
+        return User.find(filter).then(result=>{
+            return result
+        })
+        //return User.find({ services: mathTeachingService._id.toString(), city: 'Madrid', borough: 'Vallecas' })
+        //return User.find({ services: service, city: city, borough })
     },
 
-    update(id, name, surname, email, username, password, newUsername, newPassword) {
+    updateUser(id, name, surname, email, username, password, newUsername, newPassword) {
+        // TODO
+    },
+
+    retrieveUser(_id) {
         return Promise.resolve()
-        .then(() => {
-            validate({ id, name, surname, email, username, password, newUsername, newPassword })
+            .then(() => {
+                validateStringProps({ _id })
 
-            return User.findOne({ username: newUsername })
-        })
-        .then(user => {
-            if (user) throw Error('username already exists')
+                //return User.findOne({ id }, 'id name surname email username') // WARN! it returns _id too!
+                return User.findOne({ _id }, { _id: 0, password: 0 })
+            })
+            .then(user => {
+                if (!user) throw Error('user does not exist')
 
-            return User.findOne({ id })
-        })
-        .then(user => {
-            if (!user) throw Error('user does not exists')
-
-            if (user.username !== username || user.password !== password) throw Error('username and/or password wrong')
-
-            //return User.updateOne({ id }, { $set: { name, surname, email, username: newUsername, password: newPassword } }) // NOTE $set also works here, but it can be simplified as following statement
-            return User.updateOne({ id }, { name, surname, email, username: newUsername, password: newPassword })
-        })
+                return user
+            })
     },
 
-    retrieve(_id) {
-        return Promise.resolve()
-        .then(() => {
-            validate({ _id })
-
-            //return User.findOne({ id }, 'id name surname email username') // WARN! it returns _id too!
-            return User.findOne({_id }, { _id: 0, password: 0 })
-        })
-        .then(user => {
-            if (!user) throw Error('user does not exist')
-
-            return user
-        })
+    removeUser(id, username, password) {
+        // TODO
     },
 
-    remove(id, username, password) {
-        return Promise.resolve()
-        .then(() => {
-            validate({ id, username, password })
-
-            return User.findOne({ id })
-        })
-        .then(user => {
-            if (!user) throw Error('user does not exist')
-
-            if (user.username !== username || user.password !== password) throw Error('username and/or password wrong')
-
-            return User.deleteOne({ id })
-        })
+    listServices() {
+        return Service.find()
     },
 
-    services() {
-        return Service.find({})
+    listContractsServed(serverId) {
+        // TODO
+    },
+
+    listContractsRequested(clientId) {
+        // TODO
+    },
+
+    makeContract(serviceId, serverId, clientId) {
+        // TODO
+    },
+
+    acceptContract(contractId, serverId, estimatedTime) {
+        // TODO
+    },
+
+    rejectContract(contractId, serverId) {
+        // TODO
+    },
+
+    markContractDone(contractId, serverId, dedicatedTime) {
+        // TODO
+    },
+
+    validateContract(contractId, clientId, validatedTime) {
+        // TODO
+    },
+
+    cancelContract(contractId, clientId) {
+        // TODO
+    },
+
+    addUserReview(contractId, userId, comment, valuation) {
+        // TODO
+    },
+
+    listUserReviews(userId) {
+        // TODO
     }
 }
 

@@ -3,7 +3,7 @@ const logic = require('../../logic')
 
 module.exports = (req,res) => {
     const {id} =req.params
-    logic.retrieve(id)
+    logic.retrieveUser(id)
     .then(user => res.json(success(user)))
     .catch(err => res.json(fail(err)))
 }

@@ -11,23 +11,41 @@ class Search extends Component {
     super(props)
 
     this.state={
-      services: [],
+      services: [],      
       service: '',
       city: '',
-      borrough: ''
+      borough: ''
     }
   }
 
+  fillService = (event) => {
+    this.setState({ service: event.target.value })
+  }
+
+  fillCity = (event) => {
+    this.setState({ city: event.target.value})
+  }
+
+  fillBorough = (event) => {
+    this.setState({ borough: event.target.value})
+  }
+
+  submit = () => {
+    api_client.getList(
+      this.state.service,
+      this.state.city,
+      this.state.borough
+    ).then(users => {
+      this.props.getList(users)
+    })
+  }
+
   componentWillMount() {
-  
     api_client.getServices().then(services => {
-      console.log(services)
       this.setState({ services })
     })
-    
   }
   
-
   render() {
     return (
       <main>
@@ -39,10 +57,11 @@ class Search extends Component {
               <div className="col-12">
                 <div className="card searchField">
                   <div className="card-body">
-                    <form method="post">
+                    <form method="post" onSubmit={(e) => { e.preventDefault(); this.submit() }}>
                       <div className="row">
                         <div className="col-sm-12 col-md-3 field">
-                          <select>
+                          <select onChange={this.fillService}>
+                          <option className="field">Select Service</option>
                           {
                             this.state.services.map(service => {
                               return <option className="field" value={service._id}>{service.title}</option>
@@ -55,10 +74,10 @@ class Search extends Component {
                         <div className="col-sm-12 col-md-3" />
                         <div className="col-sm-12 col-md-3" />
                         <div className="col-sm-12 col-md-3 field">
-                          <input type="text" placeholder="city" size="25" />
+                          <input type="text" placeholder="city" size="25" onChange={this.fillCity} value={this.state.city} />
                         </div>
                         <div className="col-sm-12 col-md-3 field">
-                          <input type="text" placeholder="borrough" size="25" />
+                          <input type="text" placeholder="borough" size="25" onChange={this.fillBorough} />
                         </div>
                         <div className="col-sm-12 col-md-3">
                           <input type="submit" defaultValue="Search" className="btn btn-outline-secondary" />
@@ -73,9 +92,9 @@ class Search extends Component {
             <div className="row">
               <div className="col-md-12 title">
                 <h5>Users matched</h5>
+                <h6>{this.state.city} ({this.state.borough})</h6>
               </div>
             </div>
-
             <div className="card-group">
             {
               this.props.users.map(user => {
@@ -83,7 +102,7 @@ class Search extends Component {
               })
             }
             </div>
-            <div className="row">
+            {/* <div className="row">
               <div className="text-center col-12 padding-left: 0px">
                 <nav>
                   <ul className="pagination pagination-sm justify-content-center">
@@ -105,7 +124,7 @@ class Search extends Component {
                   </ul>
                 </nav>
               </div>
-            </div>
+            </div> */}
           </div>
         </main>
     )
