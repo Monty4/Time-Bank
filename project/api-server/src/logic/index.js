@@ -59,12 +59,33 @@ const logic = {
         return User.find(filter).then(result=>{
             return result
         })
-        //return User.find({ services: mathTeachingService._id.toString(), city: 'Madrid', borough: 'Vallecas' })
-        //return User.find({ services: service, city: city, borough })
     },
 
-    updateUser(id, name, surname, email, username, password, newUsername, newPassword) {
-        // TODO
+    updateUser(_id, name, surname, username, newUsername, password, newPassword, city, borough, email) {
+        console.log(_id)
+        return Promise.resolve()
+            .then(() => {
+
+                validateStringProps({ _id, name, surname, username, password, city, borough, email })
+                // validateStringArrayProp('serviceIds', serviceIds)
+
+                return User.findOne({ username: newUsername })
+            })
+            .then(user => {
+                console.log('user exists -> ', user)
+                if (user) throw Error('username already exists')
+
+                return User.findOne({ _id })
+            })
+            .then(user => {
+                console.log('user to modify -> ',user)
+                if (!user) throw Error('user does not exists')
+
+                if (user.username !== username || user.password !== password) throw Error('username and/or password wrong')
+
+                //return User.updateOne({ id }, { $set: { name, surname, email, username: newUsername, password: newPassword } }) // NOTE $set also works here, but it can be simplified as following statement
+                return User.updateOne({ _id }, { name, surname, email, username: newUsername, password: newPassword })
+            })
     },
 
     retrieveUser(_id) {
