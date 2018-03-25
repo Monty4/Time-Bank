@@ -1,14 +1,18 @@
 import React, { Component} from 'react'
 
 import { NavLink } from 'react-router-dom'
+import { withRouter } from 'react-router-dom' 
 
 class List extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      id:''
+    }
   }
 
-  sendUserID = (userID) => {
-    this.props.onClickUserId(userID)
+  sendUserID = (id) => {
+    this.props.history.push(`/datauser/${id}`)
   }
 
   sendUserName = (userName) => {
@@ -25,7 +29,7 @@ class List extends Component {
             <div className="progress-bar" role="progressbar" style={{ width: `${this.props.user.valuation}%` }} aria-valuenow={25} aria-valuemin={0} aria-valuemax={100}>{this.props.user.valuation}%</div>
             </div>
             <p />
-            <NavLink className="btn btn-primary" to="/datauser" onClick={()=>{this.sendUserID(`${this.props.user._id}`); this.sendUserName(`${this.props.user.name}`)}}>View more</NavLink>
+            <button className="btn btn-primary" to="/datauser" onClick={(e)=>{e.preventDefault(); this.sendUserID(this.props.user._id)}}>View more</button>
           </div>
         </div>
       </div>
@@ -33,4 +37,4 @@ class List extends Component {
   }
 }
 
-export default List
+export default withRouter(List)

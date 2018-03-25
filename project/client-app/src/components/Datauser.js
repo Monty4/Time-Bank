@@ -1,69 +1,127 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
+import '../App.css'
 
-import api_client from '../api-client.js'
+import api from '../api-client.js'
 import Comments from './Comments'
 
 class Datauser extends Component {
-    constructor(props) {
-        super(props)
-        this.state={
-            user: undefined
+    constructor() {
+        super()
+        this.state = {
+            user: [],
+            contractsServed: [],
+            contractsRequested: []
         }
     }
 
-    componentWillMount() {
-        api_client.getUser(this.props.id).then(user => {
-            this.setState({user})
-        })
-      }
+    componentDidMount() {
+        api.retrieve(this.props.match.params.id).then(res => res.data).then(user => this.setState({ user }))
+        api.retrievecontractsServed(this.props.match.params.id).then(res => res.data).then(contractsServed => this.setState({ contractsServed }))
+        api.retrievecontractsRequested(this.props.match.params.id).then(res => res.data).then(contractsRequested => this.setState({ contractsRequested }))
+    }
 
     render() {
         return (
             <main>
                 {(this.state.user) ? // Al ser una llamada asíncrona, la página se carga antes de obtener datos y da error. Para que esto no ocurra, ponemos el ternario
-
-                <div className="container">
-                    <div className="row">
-                        <div className="card-title section">
-                            <h3>User information</h3>
-                        </div>
-                        <div className="col-12">
-                            <div className="card searchField">
-                                <div className="card-body">
-                                    <form>
-                                        <div className="row">
-                                            <div className="col-sm-12 col-md-3">
-                                                <h6><strong>Name:</strong> {this.state.user.name} {this.state.user.surname}</h6>
+                    <div className="container">
+                        <div className="row">
+                            <div className="card-title section">
+                                <h3>Server user information</h3>
+                                <h6>Name: {this.state.user.name} {this.state.user.surname}({this.state.user.username})</h6>
+                                <h6>City: {this.state.user.city}</h6>
+                                <h6>Borough: {this.state.user.borough}</h6>
+                            </div>
+                            <div className="col-12">
+                                { this.state.contractsServed.length > 0 ?
+                                <div className="card searchField">
+                                    <div className="title"><h5>Served Services</h5></div>
+                                    <div className="card-body">
+                                        <form>
+                                            <div className="row">
+                                            <div className="col-12"> 
+                                            <div className="col-4 contractfield">
+                                                <label>Status</label>
+                                            </div>    
+                                            <div className="col-4 contractfield" >    
+                                                <label>Client</label>
+                                            </div>    
+                                            <div className="col-4 contractfield" >    
+                                                <label>Service</label>
                                             </div>
-                                            <div className="col-sm-12 col-md-3">
-                                            <h6><strong>City:</strong> {this.state.user.city}</h6>
                                             </div>
-                                            <div className="col-sm-12 col-md-3">
-                                            <h6><strong>Borrough:</strong> {this.state.user.borough}</h6>
+                                                {this.state.contractsServed.map((service, index) => {
+                                                        return (
+                                                            <div className="col-12"> 
+                                                            <div className="col-4 contractfield">
+                                                                <label>{service.status}</label>
+                                                            </div>    
+                                                            <div className="col-4 contractfield" >    
+                                                                <label>{service.client}</label>
+                                                            </div>    
+                                                            <div className="col-4 contractfield" >    
+                                                                <label>{service.service}</label>
+                                                            </div>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                <div className="col-sm-12 col-md-3" />
                                             </div>
-                                            <div className="col-sm-12 col-md-3" />
-                                            {(this.state.user.comments) ?
-                                                this.state.user.comments.map(user => {
-                                                    return <Comments user={user} />
-                                                })
-
-                                                :undefined
-                                            }
-                                            <div className="col-12 field">
-                                                <input type="submit" defaultValue="Contract" className="btn btn-outline-secondary" />
+                                        </form>
+                                    </div>
+                                </div>
+                                : undefined
+                            }
+                            { this.state.contractsRequested.length > 0 ?
+                                <div className="card searchField">
+                                    <div className="title"><h5>Requested Services</h5></div>
+                                    <div className="card-body">
+                                        <form>
+                                            <div className="row">
+                                            <div className="col-12"> 
+                                            <div className="col-4 contractfield">
+                                                <label>Status</label>
+                                            </div>    
+                                            <div className="col-4 contractfield" >    
+                                                <label>Client</label>
+                                            </div>    
+                                            <div className="col-4 contractfield" >    
+                                                <label>Service</label>
                                             </div>
-                                            <div className="col-sm-12 col-md-3" />
-                                        </div>
-                                    </form>
+                                            </div>
+                                                {this.state.contractsRequested.map((service, index) => {
+                                                        return (
+                                                            <div className="col-12"> 
+                                                            <div className="col-4 contractfield">
+                                                                <label>{service.status}</label>
+                                                            </div>    
+                                                            <div className="col-4 contractfield" >    
+                                                                <label>{service.client}</label>
+                                                            </div>    
+                                                            <div className="col-4 contractfield" >    
+                                                                <label>{service.service}</label>
+                                                            </div>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                
+                                                <div className="col-sm-12 col-md-3" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                : undefined
+                                }
+                                <div className="col-12 field">
+                                    <input type="submit" defaultValue="Contract" className="btn btn-outline-secondary" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                : undefined}
+                    : undefined
+                }
             </main>
-
         )
     }
 }

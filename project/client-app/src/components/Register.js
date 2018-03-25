@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router'
-import api_client from '../api-client'
+import api from '../api-client'
 
 import '../App.css'
 import '../login.css'
@@ -55,7 +55,7 @@ class Register extends Component {
   }
 
   submit = () => {
-    api_client.registerUser(
+    api.register(
       this.state.name,
       this.state.surname,
       this.state.username,
@@ -68,8 +68,8 @@ class Register extends Component {
   }
 
   componentWillMount() {
-    api_client.getServices().then(services => {
-      this.setState({ services })
+    api.services().then(services => {
+      this.setState({ services: services.data })
     })
   }
 

@@ -2,10 +2,8 @@ const { success, fail } = require('./api-utils')
 const logic = require('../../logic')
 
 module.exports = (req,res) => {
-
-    const {service, server, client} = req.body
-    logic.registerContract(service, server, client )
-    
-    .then(users => res.json(success(users)))
+    const {id} =req.params
+    logic.listContractsServed(id)
+    .then(user => res.json(success(user)))
     .catch(err => res.json(fail(err)))
 }

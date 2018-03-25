@@ -33,7 +33,14 @@ var api = {
     },
     services: function services() {
         return this._call('get', 'services');
-    }
+    },
+    retrievecontractsServed: function retrieveservedcontracts(id) {
+        return this._call('get', 'user/' + id);
+    },
+    retrievecontractsRequested: function retrievecontractsRequested(id) {
+        return this._call('get', 'user/' + id);
+    },
+    
 };
 
 module.exports = api;

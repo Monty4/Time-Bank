@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import '../App.css'
 
-import api_client from '../api-client.js'
+import api from '../api-client.js'
 
 import List from './List'
 
@@ -31,18 +31,18 @@ class Search extends Component {
   }
 
   submit = () => {
-    api_client.getList(
+    api.list(
       this.state.service,
       this.state.city,
       this.state.borough
     ).then(users => {
-      this.props.getList(users)
+      this.props.getList(users.data)
     })
   }
 
   componentWillMount() {
-    api_client.getServices().then(services => {
-      this.setState({ services })
+    api.services().then(services => {
+      this.setState({ services: services.data })
     })
   }
   
@@ -92,39 +92,16 @@ class Search extends Component {
             <div className="row">
               <div className="col-md-12 title">
                 <h5>Users matched</h5>
-                <h6>{this.state.city} ({this.state.borough})</h6>
               </div>
             </div>
             <div className="card-group">
             {
-              this.props.users.map(user => {
+              this.props.users ? this.props.users.map(user => {
+                if (user._id !== '5ab41ba28971a93b24e8bb97') // Es el user Mario Montalban que se utiliza como cliente
                 return <List key={user._id} user={user} onClickUserId={this.props.onClickUserId} onClickUserName={this.props.onClickUserName} />
-              })
+              }): undefined
             }
             </div>
-            {/* <div className="row">
-              <div className="text-center col-12 padding-left: 0px">
-                <nav>
-                  <ul className="pagination pagination-sm justify-content-center">
-                    <li className="page-item disabled">
-                      <a className="page-link" href="#" tabIndex={-1}>Previous</a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">1</a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">2</a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">3</a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#!">Next</a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div> */}
           </div>
         </main>
     )

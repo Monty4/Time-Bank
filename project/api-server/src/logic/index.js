@@ -116,13 +116,6 @@ const logic = {
         return Service.find()
     },
 
-
-
-
-
-
-
-
     // New Contract
     registerContract(service, server, client) {
         return Promise.resolve()
@@ -135,21 +128,52 @@ const logic = {
             
     },
 
+    listContractsServed(_id) {
+        
+        return Promise.resolve()
+        .then(() => {
+            
+            validateStringProps({ _id })
+
+            //return User.findOne({ id }, 'id name surname email username') // WARN! it returns _id too!
+            return Contract.find({ server: _id }, { _id: 0 })
+        })
+        .then(contract => {
+            if (!contract) throw Error('contract does not exist')
 
 
-
-    
-
-    listContractsServed(serverId) {
-        // TODO
+            return contract
+        })
     },
 
-    listContractsRequested(clientId) {
-        // TODO
+    // listContractsServed(_id) {
+        
+    //     Contract.find({status: "pending"})
+    //     .populate('server')
+    //     .exec(function(err, contract) {
+    //         if (err) return handleError(err)
+    //         console.log('The name is', contract.user.name)
+    //     })
+    // },
+
+    listContractsRequested(_id) {
+        return Promise.resolve()
+        .then(() => {
+            
+            validateStringProps({ _id })
+
+            return Contract.find({ client: _id }, { _id: 0 })
+        })
+        .then(user => {
+            if (!user) throw Error('user does not exist')
+
+            return user
+        })
     },
 
     makeContract(serviceId, serverId, clientId) {
         // TODO
+        // registerContract()
     },
 
     acceptContract(contractId, serverId, estimatedTime) {
@@ -172,8 +196,14 @@ const logic = {
         // TODO
     },
 
-    addUserReview(contractId, userId, comment, valuation) {
-        // TODO
+    addUserReview(contract, user, comment, valuation) {
+        return Promise.resolve()
+        .then(_review => {
+
+            const review = new Review({ contract, user, comment, valuation })
+
+            return review.save()
+        })
     },
 
     listUserReviews(userId) {

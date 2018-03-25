@@ -20,9 +20,9 @@ function Menu() {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/search">Search</NavLink>
               </li>
-              <li className=" nav-item active">
+              {/* <li className=" nav-item active">
               <NavLink className="nav-link" to="/register">Register</NavLink>
-              </li>
+              </li> */}
             </ul>
         </div>
         </nav>

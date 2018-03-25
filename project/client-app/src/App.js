@@ -6,7 +6,7 @@ import Menu from './components/Menu'
 import Search from './components/Search'
 import Datauser from './components/Datauser'
 import Register from './components/Register'
-import api_client from './api-client.js'
+import api from './api-client.js'
 
 
 
@@ -45,8 +45,8 @@ class TimebankApp extends Component {
 
   componentWillMount() {
   
-    api_client.getList().then(users => {
-      this.setState({ users})
+    api.list().then(users => {
+      this.setState({ users: users.data})
     })
 }
 
@@ -71,8 +71,8 @@ class TimebankApp extends Component {
             <Search getList={this.getFilteredUsers} users={this.state.users} onClickUserId={this.setUserId} onClickUserName={this.setUserName} />
           )} />
 
-          <Route path="/datauser" render={() => (
-            <Datauser id={this.state.userID} />
+          <Route path="/datauser/:id" render={routerProps => (
+            <Datauser  {...routerProps}/>
           )} />
 
         </div>

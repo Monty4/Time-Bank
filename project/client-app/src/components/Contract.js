@@ -1,7 +1,7 @@
 import React, { Component} from 'react'
 
 
-class Comments extends Component {
+class Contract extends Component {
   constructor(props) {
     super(props)
     // console.log(props.contractsServed)
@@ -16,4 +16,4 @@ class Comments extends Component {
   }
 }
 
-export default Comments
+export default Contract

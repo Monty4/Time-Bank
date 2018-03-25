@@ -4,7 +4,6 @@ const api = {
     _baseUrl() {
        
             return `${this.protocol}://${this.host}:${this.port}/api`
-
     },
 
     _call(method, path, body, qs) {
@@ -17,10 +16,10 @@ const api = {
         })
     },
 
+
     list(service, city, borough) {
         return this._call('get', 'users', undefined, { service, city, borough })
     },
-
     register(name, surname, username, password, services, city, borough, email) {
         return this._call('post', 'register', { name, surname, username, password, services, city, borough, email })
     },
@@ -39,6 +38,14 @@ const api = {
 
     services() {
         return this._call('get', 'services')
+    },
+
+    retrievecontractsServed(id) {
+        return this._call('get', `servedcontracts/${id}`)
+    },
+
+    retrievecontractsRequested(id) {
+        return this._call('get', `requestedcontracts/${id}`)
     }
 }
 
