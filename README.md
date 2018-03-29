@@ -36,9 +36,6 @@ The project consists of a place where users can share their time with other user
 
 - **Contracts Flow**: The initial state of a contract is 'pending'. The client can change it to reject and the server can cancel it.The following states of an accepted contract are, 'done' when the server has finished the service and 'validated' when the client validates it.
 
-## COMPONENTS
-  
-
 ## DEVELOPER: Mario Montalbán
 
 - [GITHUB](https://github.com/Monty4/Time-Bank/tree/develop)
