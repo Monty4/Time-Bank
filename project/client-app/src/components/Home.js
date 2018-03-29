@@ -17,7 +17,7 @@ class Home extends Component {
           <div className="row">
             <div className="col-sm-2" />
             <div className="col-sm-8">
-              <h3>Un lugar donde compartir tu tiempo y conocimiento con otros usuarios</h3>
+              <h3>A place to share your time and knowledge with other users</h3>
             </div>
             <div className="col-sm-2" />
           </div>

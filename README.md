@@ -24,15 +24,16 @@ The project consists of a place where users can share their time with other user
 - REACT
 - REACT-ROUTER
 
-## COMPONENTS
-
 ## FLOW
 
 - **Seach a service**: Users can search a service, by descripton, city and borough.
 
-- **Contract a user**: Once the user has found a user that offers the request service, they can contact by email. At this moment, a contract is generated with status 'Pending'. If user accept to make the job, contract changes to 'Accepted', and when finish, to 'Finished'.
+- **Contract a user and flow**: Once the user is found, we request the service generating a contract with pending status. This contract may be accepted or canceled by the contract server or rejected by the client. After the server ends the service and later the client values the server service.
 
-- **Manage contracts** user has the option to value the service, this way users can get TC(time-coins) and can improve their position in the rate. When user is rated, contract status and TC are updated
+- **Manage contracts** The flow of a contract is:
+
+## COMPONENTS
+  
 
 ## DEVELOPER: Mario Montalbán
 
