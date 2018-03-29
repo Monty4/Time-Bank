@@ -8,10 +8,12 @@ The project consists of a place where users can share their time with other user
 ## STYLES
 
 - [DATA MODEL](docs/DataModel.png)
+- [BLOCK MODEL](docs/BlockModel.png)
 - [MOCKUP](docs/Mockup.png)
 - [USE CASES](docs/UseCases.png)
 
 ![GitHub Logo](docs/DataModel.png)
+![GitHub Logo](docs/BlockModel.png)
 ![GitHub Logo](docs/Mockup.png)
 ![GitHub Logo](docs/UseCases.png)
 
