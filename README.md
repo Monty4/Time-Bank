@@ -1,5 +1,5 @@
 # TIME'S BANK PROJECT
-### A place where to share our time with other people.
+### A place to share our time and knowledge with other people.
 
 ## DESCRIPTION
 
@@ -11,29 +11,28 @@ The project consists of a place where users can share their time with other user
 - [MOCKUP](docs/Mockup.png)
 - [USE CASES](docs/UseCases.png)
 
-## API
+## Personal API's and APP
 
-Personal API
+- API Client, API Server and Client APP
 
 ## TECHNOLOGIES
 
 - CSS FRAMEWORK: BOOTSRAP 4
+- Express
+- MongoDB
+- Node Server
 - REACT
 - REACT-ROUTER
-- MongoDB
-- Jasmine
 
 ## COMPONENTS
 
 ## FLOW
 
-- **Regiter**: User must be registered to be able to access.
+- **Seach a service**: Users can search a service, by descripton, city and borough.
 
-- **Seach**: User can search users that offers a service, by service or by city zone.
+- **Contract a user**: Once the user has found a user that offers the request service, they can contact by email. At this moment, a contract is generated with status 'Pending'. If user accept to make the job, contract changes to 'Accepted', and when finish, to 'Finished'.
 
-- **Contact & Contract**: Once the user has found a user that offers the request service, they can contact by email. At this moment, a contract is generated with status 'Pending'. If user accept to make the job, contract changes to 'Accepted', and when finish, to 'Finished'.
-
-- **When service is finished** user has the option to value the service, this way users can get TC(time-coins) and can improve their position in the rate. When user is rated, contract status and TC are updated
+- **Manage contracts** user has the option to value the service, this way users can get TC(time-coins) and can improve their position in the rate. When user is rated, contract status and TC are updated
 
 ## DEVELOPER: Mario Montalbán
 

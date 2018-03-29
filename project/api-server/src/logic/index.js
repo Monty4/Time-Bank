@@ -1,5 +1,5 @@
 const { User, Service, Contract, Review } = require('../models')
-// const mongoose = require('mongoose')
+const ObjectId = require('mongoose').Types.ObjectId; 
 
 function validateStringProp(prop, value) {
     if (typeof value === 'undefined' || !value.trim().length) throw Error(`${prop} cannot be undefined or empty`)
@@ -65,46 +65,41 @@ const logic = {
 
     // Update User by ID
     updateUser(_id, name, surname, username, newUsername, password, newPassword, city, borough, email) {
-        console.log(_id)
+
         return Promise.resolve()
-            .then(() => {
+        .then(() => {
 
-                validateStringProps({ _id, name, surname, username, password, city, borough, email })
-                // validateStringArrayProp('serviceIds', serviceIds)
+            validateStringProps({ _id, name, surname, username, password, city, borough, email })
 
-                return User.findOne({ username: newUsername })
-            })
-            .then(user => {
-                console.log('user exists -> ', user)
-                if (user) throw Error('username already exists')
+            return User.findOne({ username: newUsername })
+        })
+        .then(user => {
+            if (user) throw Error('username already exists')
 
-                return User.findOne({ _id })
-            })
-            .then(user => {a
-                console.log('user to modify -> ',user)
-                if (!user) throw Error('user does not exists')
+            return User.findOne({ _id })
+        })
+        .then(user => {a
+            if (!user) throw Error('user does not exists')
 
-                if (user.username !== username || user.password !== password) throw Error('username and/or password wrong')
+            if (user.username !== username || user.password !== password) throw Error('username and/or password wrong')
 
-                //return User.updateOne({ id }, { $set: { name, surname, email, username: newUsername, password: newPassword } }) // NOTE $set also works here, but it can be simplified as following statement
-                return User.updateOne({ _id }, { name, surname, email, username: newUsername, password: newPassword })
-            })
+            return User.updateOne({ _id }, { name, surname, email, username: newUsername, password: newPassword })
+        })
     },
 
     // Retrieve User by ID
     retrieveUser(_id) {
         return Promise.resolve()
-            .then(() => {
-                validateStringProps({ _id })
+        .then(() => {
+            validateStringProps({ _id })
 
-                //return User.findOne({ id }, 'id name surname email username') // WARN! it returns _id too!
-                return User.findOne({ _id }, { _id: 0, password: 0 })
-            })
-            .then(user => {
-                if (!user) throw Error('user does not exist')
+            return User.findOne({ _id }, { _id: 0, password: 0 })
+        })
+        .then(user => {
+            if (!user) throw Error('user does not exist')
 
-                return user
-            })
+            return user
+        })
     },
 
     removeUser(id, username, password) {
@@ -116,16 +111,21 @@ const logic = {
         return Service.find()
     },
 
-    // New Contract
-    registerContract(service, server, client) {
+    // Search Service by Id
+    listService(_id) {
+        return Service.findOne({ _id })
+    },
+
+    // New Contract HA DE SER MAKE CONTRAT
+    registerContract ( service, server, client, status, estimatedTime, investedTime, validatedTime ) {
+
         return Promise.resolve()
-            .then(_contract => {
+        .then(_contract => {
 
-                const contract = new Contract({ service, server, client })
+            const contract = new Contract({ service, server, client, status, estimatedTime, investedTime, validatedTime })
 
-                return contract.save()
-            })
-            
+            return contract.save()
+        })
     },
 
     listContractsServed(_id) {
@@ -135,8 +135,32 @@ const logic = {
             
             validateStringProps({ _id })
 
-            //return User.findOne({ id }, 'id name surname email username') // WARN! it returns _id too!
-            return Contract.find({ server: _id }, { _id: 0 })
+            return Contract.find({ server: _id }).then((contract)=>{
+
+               return User.populate(contract,[ {path: 'server', select:'name'},  {path: 'client', select:'name'}]).then(()=>{
+                    return Service.populate(contract,  {path: 'service', select: 'title'})
+               })
+            })
+        })
+        .then(contract => {
+            if (!contract) throw Error('contract does not exist')
+            return contract
+        })
+    },
+
+    listContractsRequested(_id) {
+        
+        return Promise.resolve()
+        .then(() => {
+            
+            validateStringProps({ _id })
+
+            return Contract.find({ client: _id }).then((contract)=>{
+
+               return User.populate(contract,[ {path: 'server', select:'name'},  {path: 'client', select:'name'}]).then(()=>{
+                    return Service.populate(contract,  {path: 'service', select: 'title'})
+               })
+            })
         })
         .then(contract => {
             if (!contract) throw Error('contract does not exist')
@@ -146,38 +170,19 @@ const logic = {
         })
     },
 
-    // listContractsServed(_id) {
-        
-    //     Contract.find({status: "pending"})
-    //     .populate('server')
-    //     .exec(function(err, contract) {
-    //         if (err) return handleError(err)
-    //         console.log('The name is', contract.user.name)
-    //     })
-    // },
-
-    listContractsRequested(_id) {
-        return Promise.resolve()
-        .then(() => {
-            
-            validateStringProps({ _id })
-
-            return Contract.find({ client: _id }, { _id: 0 })
-        })
-        .then(user => {
-            if (!user) throw Error('user does not exist')
-
-            return user
-        })
-    },
-
     makeContract(serviceId, serverId, clientId) {
-        // TODO
-        // registerContract()
+        return Promise.resolve()
+        .then(_contract => {
+
+            const contract = new Contract({ service, server, client, status, estimatedTime, investedTime, validatedTime })
+
+            return contract.save()
+        })
     },
 
-    acceptContract(contractId, serverId, estimatedTime) {
-        // TODO
+    // Mark contract as Accepted
+    acceptContract(_id, status) {
+        return Contract.updateOne({ _id }, { status }).then(()=>_id)
     },
 
     rejectContract(contractId, serverId) {
@@ -188,27 +193,48 @@ const logic = {
         // TODO
     },
 
-    validateContract(contractId, clientId, validatedTime) {
-        // TODO
+    donecontract(_id, status, investedTime) {
+        return Contract.updateOne({ _id }, { status, investedTime }).then(()=>_id)
     },
 
-    cancelContract(contractId, clientId) {
-        // TODO
+    validatecontract(_id, status, validatedTime) {
+        return Contract.updateOne({ _id }, { status, validatedTime }).then(()=>_id)
     },
 
-    addUserReview(contract, user, comment, valuation) {
+    // Mark Contract as Cacelled
+    cancelContract(_id, status) {
+        return Contract.updateOne({ _id }, { status }).then(()=>_id)
+    },
+
+    registerreview( contract, user, comment, valuation) {
         return Promise.resolve()
         .then(_review => {
-
             const review = new Review({ contract, user, comment, valuation })
 
             return review.save()
         })
+        .then(()=>{
+            this.listUserReviews(user)
+            .then(reviews=>{
+                const totalValuation =  reviews.reduce((acum,rev)=>{
+                    return acum + rev.valuation
+                },0)
+                const avgValuation = (totalValuation / reviews.length)
+                const finalValuation = (avgValuation*20)
+                return User.update({_id:user},{valuation:finalValuation})
+            })
+        })
     },
 
     listUserReviews(userId) {
-        // TODO
-    }
+        return Promise.resolve()
+        .then(() => {
+            validateStringProps({ userId })
+            const query = { user: new ObjectId(userId) };
+            return Review.find(query)
+        })
+        
+    },
 }
 
 module.exports = logic

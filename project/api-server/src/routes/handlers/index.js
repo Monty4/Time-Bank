@@ -6,10 +6,13 @@ const update = require('./update')
 const registercontract = require('./registercontract')
 const retrieveservedcontracts = require('./retrieveservedcontracts')
 const retrieverequestedcontracts = require('./retrieverequestedcontracts')
+const acceptContract = require('./acceptContract')
+const validatecontract = require('./validatecontract')
+const donecontract = require('./donecontract')
 const registerreview = require('./registerreview')
-// const create = require('./create')
-// const _delete = require('./delete')
-//...
+const retrievereview = require('./retrievereview')
+const listuserreviews = require('./listuserreviews')
+const service = require('./service')
 
 module.exports = {
     list,
@@ -20,7 +23,11 @@ module.exports = {
     registercontract,
     retrieveservedcontracts,
     retrieverequestedcontracts,
-    registerreview
-    // create,
-    // delete: _delete,
+    acceptContract,
+    validatecontract,
+    donecontract,
+    registerreview,
+    retrievereview,
+    service,
+    listuserreviews
 }

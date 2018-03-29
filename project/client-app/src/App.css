@@ -52,7 +52,14 @@ body {
   border-color: #547980;
 }
 
+.btn-primary:hover{
+  background-color: #1899AF;
+  color: white;
+  border-color: #547980;
+}
+
 .searchField {
+  margin-top: 5px;
   background-color: #E5FCC2;
   padding: 0px;
 }
@@ -64,4 +71,19 @@ body {
 
 .contractfield {
   float: left;
+  text-align: center;
+}
+
+a.accepted {
+  color: green;
+  margin-left: 5px;
+}
+
+a.cancelled {
+  color: firebrick;
+  margin-left: 5px
+}
+
+.validate {
+  height: 20px;
 }

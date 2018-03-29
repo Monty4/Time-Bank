@@ -40,12 +40,45 @@ const api = {
         return this._call('get', 'services')
     },
 
+    service(id) {
+        return this._call('get', `service/${id}`)
+    },
+
     retrievecontractsServed(id) {
         return this._call('get', `servedcontracts/${id}`)
     },
 
     retrievecontractsRequested(id) {
         return this._call('get', `requestedcontracts/${id}`)
+    },
+
+    registercontract(service, server, client, status, estimatedTime, investedTime, validatedTime) {
+        return this._call('post', `registercontract`, { service, server, client, status, estimatedTime, investedTime, validatedTime})
+    },
+
+    acceptContract(_id, status) {
+        return this._call('put', 'acceptcontract', { _id, status })
+    },
+
+    cancelContract(_id, status) {
+        return this._call('put', 'acceptcontract', { _id, status })
+    },
+
+    validatecontract(_id, status, estimatedTime) {
+        return this._call('put', 'validatecontract', { _id, status, estimatedTime })
+    },
+
+    donecontract(_id, status, investedTime) {
+        return this._call('put', 'donecontract', { _id, status, investedTime })
+    },
+
+    registerreview( contract, user, comment, valuation) {
+        // console.log('dddd',_id, server, review, valuation)
+        return this._call('post', 'registerreview', {  contract, user, comment, valuation })
+    },
+    listUserReviews(user){
+        
+        return this._call('get', `listuserreview/${user}`)
     }
 }
 

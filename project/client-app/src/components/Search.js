@@ -14,23 +14,25 @@ class Search extends Component {
       services: [],      
       service: '',
       city: '',
-      borough: ''
+      borough: '',
+      show: ''
     }
   }
 
   fillService = (event) => {
-    this.setState({ service: event.target.value })
+    this.setState({ service: event.target.value, show: '' })
   }
 
   fillCity = (event) => {
-    this.setState({ city: event.target.value})
+    this.setState({ city: event.target.value, show: ''})
   }
 
   fillBorough = (event) => {
-    this.setState({ borough: event.target.value})
+    this.setState({ borough: event.target.value, show: ''})
   }
 
   submit = () => {
+    this.setState({ show: 'yes'})
     api.list(
       this.state.service,
       this.state.city,
@@ -52,7 +54,7 @@ class Search extends Component {
           <div className="container">
             <div className="row">
               <div className="card-title section">
-                <h3>Search</h3>
+                <h3>Search users</h3>
               </div>
               <div className="col-12">
                 <div className="card searchField">
@@ -60,7 +62,7 @@ class Search extends Component {
                     <form method="post" onSubmit={(e) => { e.preventDefault(); this.submit() }}>
                       <div className="row">
                         <div className="col-sm-12 col-md-3 field">
-                          <select onChange={this.fillService}>
+                          <select onChange={this.fillService} className="field">
                           <option className="field" value="">Select Service</option>
                           {
                             this.state.services.map(service => {
@@ -96,9 +98,9 @@ class Search extends Component {
             </div>
             <div className="card-group">
             {
-              this.props.users ? this.props.users.map(user => {
+              (this.state.show && this.state.service) ? this.props.users.map(user => {
                 if (user._id !== '5ab41ba28971a93b24e8bb97') // Es el user Mario Montalban que se utiliza como cliente
-                return <List key={user._id} user={user} onClickUserId={this.props.onClickUserId} onClickUserName={this.props.onClickUserName} />
+                return <List key={user._id} user={user} service={this.state.service} />
               }): undefined
             }
             </div>

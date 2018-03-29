@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { Route, HashRouter } from 'react-router-dom'
 
 import './App.css'
+import Home from './components/Home'
 import Menu from './components/Menu'
 import Search from './components/Search'
 import Datauser from './components/Datauser'
 import Register from './components/Register'
+import Contracts from './components/Contracts'
 import api from './api-client.js'
 
 
@@ -59,8 +61,10 @@ class TimebankApp extends Component {
       <div>
       <HashRouter>
         <div>
-          <Route path="/" render={() => (
-            <Menu />
+          <Menu />
+
+          <Route exact path="/" render={() => (
+            <Home />
           )} />
 
           <Route path="/register" render={() => (
@@ -71,10 +75,13 @@ class TimebankApp extends Component {
             <Search getList={this.getFilteredUsers} users={this.state.users} onClickUserId={this.setUserId} onClickUserName={this.setUserName} />
           )} />
 
-          <Route path="/datauser/:id" render={routerProps => (
-            <Datauser  {...routerProps}/>
+          <Route path="/contracts" render={() => (
+            <Contracts />
           )} />
 
+          <Route path="/datauser/:id/:service" render={routerProps => (
+            <Datauser  {...routerProps}/>
+          )} />
         </div>
       </HashRouter>
       </div>

@@ -7,16 +7,13 @@ class List extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      id:''
+      id:'',
+      userData: '',
     }
   }
 
   sendUserID = (id) => {
-    this.props.history.push(`/datauser/${id}`)
-  }
-
-  sendUserName = (userName) => {
-    this.props.onClickUserName(userName)
+    this.props.history.push(`/datauser/${id}/${this.props.service}`) // user id and sevice id
   }
 
   render() {
@@ -25,6 +22,7 @@ class List extends Component {
         <div className="card user">
           <div className="card-body">
             <h6 className="card-title">{this.props.user.name} {this.props.user.surname}</h6>
+            <h6 className="card-title">({this.props.user.city} -{this.props.user.borough})</h6>
             <div className="progress">
             <div className="progress-bar" role="progressbar" style={{ width: `${this.props.user.valuation}%` }} aria-valuenow={25} aria-valuemin={0} aria-valuemax={100}>{this.props.user.valuation}%</div>
             </div>
