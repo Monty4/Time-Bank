@@ -73,11 +73,9 @@ const api = {
     },
 
     registerreview( contract, user, comment, valuation) {
-        // console.log('dddd',_id, server, review, valuation)
         return this._call('post', 'registerreview', {  contract, user, comment, valuation })
     },
     listUserReviews(user){
-        
         return this._call('get', `listuserreview/${user}`)
     }
 }

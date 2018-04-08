@@ -3,11 +3,12 @@ import { Route, HashRouter } from 'react-router-dom'
 
 import './App.css'
 import Home from './components/Home'
-import Menu from './components/Menu'
+// import Menu from './components/Menu'
 import Search from './components/Search'
 import Datauser from './components/Datauser'
-import Register from './components/Register'
+// import Register from './components/Register'
 import Contracts from './components/Contracts'
+import Header from './components/Header/index'
 import api from './api-client.js'
 
 
@@ -61,14 +62,10 @@ class TimebankApp extends Component {
       <div>
       <HashRouter>
         <div>
-          <Menu />
-
+          <Header />
+          
           <Route exact path="/" render={() => (
             <Home />
-          )} />
-
-          <Route path="/register" render={() => (
-            <Register setFormFields={this.setFormFields} />
           )} />
 
           <Route path="/search" render={() => (
@@ -82,6 +79,11 @@ class TimebankApp extends Component {
           <Route path="/datauser/:id/:service" render={routerProps => (
             <Datauser  {...routerProps}/>
           )} />
+
+          {/* <Route path="/register" render={() => (
+            <Register setFormFields={this.setFormFields} />
+          )} /> */}
+          
         </div>
       </HashRouter>
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import '../App.css'
+import '../styles/search.css'
 
 import api from '../api-client.js'
 
