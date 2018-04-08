@@ -20,7 +20,7 @@ class Header extends Component {
                         
                         <div className="collapse navbar-collapse" id="myNavbar">
                             <ul className="navbar-nav mr-auto">
-                                
+                                {/* <li><NavLink className="nav-link" to="/">Home</NavLink></li> */}
                                 <li><NavLink className="nav-link" to="/search">Search</NavLink></li>
                                 <li><NavLink className="nav-link" to="/contracts">Contracts</NavLink></li>
                             </ul>
