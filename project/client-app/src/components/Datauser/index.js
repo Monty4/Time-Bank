@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink, Redirect } from 'react-router-dom'
-import '../App.css'
+// import '../App.css'
 
-import api from '../api-client.js'
-import Comments from './Comments'
+import api from '../../api-client.js'
+import Comments from '../Comments/index'
 
 class Datauser extends Component {
     constructor(props) {

@@ -2,16 +2,14 @@ import React, { Component } from 'react'
 import { Route, HashRouter } from 'react-router-dom'
 
 import './App.css'
-import Home from './components/Home'
-// import Menu from './components/Menu'
-import Search from './components/Search'
-import Datauser from './components/Datauser'
-// import Register from './components/Register'
-import Contracts from './components/Contracts'
+
 import Header from './components/Header/index'
+import Home from './components/Home/index'
+import Search from './components/Search/index'
+import Datauser from './components/Datauser/index'
+import Contracts from './components/Contracts/index'
+
 import api from './api-client.js'
-
-
 
 class TimebankApp extends Component {
 

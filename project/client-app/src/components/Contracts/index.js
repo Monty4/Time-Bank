@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink, Redirect } from 'react-router-dom'
 import swal from 'sweetalert2'
-import '../App.css'
 
-import api from '../api-client.js'
+import api from '../../api-client.js'
 
 class Contracts extends Component {
     constructor(props) {
