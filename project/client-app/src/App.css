@@ -69,12 +69,12 @@ body {
   padding-right: 100px;
 }
 
-.contractfield {
+/* .contractfield {
   float: left;
   text-align: center;
-}
+} */
 
-a.accepted {
+/* a.accepted {
   color: green;
   margin-left: 5px;
 }
@@ -86,4 +86,4 @@ a.cancelled {
 
 .validate {
   height: 20px;
-}
+} */

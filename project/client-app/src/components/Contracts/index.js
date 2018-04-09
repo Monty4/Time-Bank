@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, Redirect } from 'react-router-dom'
 import swal from 'sweetalert2'
+import './index.css'
 
 import api from '../../api-client.js'
 
@@ -137,7 +138,7 @@ class Contracts extends Component {
                                 <div className="card-body">
                                     <form>
                                         <div className="row">
-                                            <div className="col-12">
+                                            <div className="col-12 field">
                                                 <div className="col-2 contractfield">
                                                     <label><strong>Status</strong></label>
                                                 </div>
@@ -157,23 +158,19 @@ class Contracts extends Component {
                                                 else if (contract.status === 'accepted' || contract.status === 'done' || 'validated') contractClass="col-2 contractfield text-success"
                                                 else if (contract.status === 'cancelled') contractClass="col-2 contractfield text-danger"
                                                 return (
-                                                    <div className="col-12"> 
+                                                    <div className="col-12 titlesRow"> 
                                                         <div className={contractClass}>
                                                             <label>{contract.status}</label>
                                                         </div>
                                                         <div className="col-2 contractfield">
                                                         { contract.status === 'pending' ? (<a className="accepted" href="" onClick={(e)=>{e.preventDefault();this.markAccept(contract._id, 'accepted')}}>Accept</a>) : undefined}
                                                         { contract.status === 'pending' ? (<a className="cancelled" href="" onClick={(e)=>{e.preventDefault();this.markAccept(contract._id, 'cancelled')}}>Cancel</a>) : undefined}
-                                                        { contract.status === 'accepted' ? (
-                                                            <div>
-                                                                <a className="accepted" href="" onClick={(e)=>{e.preventDefault();this.setDone(contract._id, 'done')}}>Done</a>
-                                                            </div>
-                                                            ) : undefined
+                                                        { contract.status === 'accepted' ? (<a className="accepted" href="" onClick={(e)=>{e.preventDefault();this.setDone(contract._id, 'done')}}>Done</a>) : undefined
                                                         }
                                                         </div>
                                                         <div className="col-4 contractfield" >    
                                                             <label>{contract.client.name}</label>
-                                                        </div>    
+                                                        </div>
                                                         <div className="col-4 contractfield" >    
                                                             <label>{contract.service.title}</label>
                                                         </div>
@@ -190,7 +187,7 @@ class Contracts extends Component {
                                 <div className="card-body">
                                     <form>
                                         <div className="row">
-                                            <div className="col-12">
+                                            <div className="col-12 field">
                                                 <div className="col-2 contractfield">
                                                     <label><strong>Status</strong></label>
                                                 </div>
@@ -210,20 +207,13 @@ class Contracts extends Component {
                                                 else if (contract.status === 'accepted' || contract.status === 'done' || 'validated') contractClass="col-2 contractfield text-success"
                                                 else if (contract.status === 'rejected') contractClass="col-2 contractfield text-danger"
                                                 return (
-                                                    <div className="col-12"> 
+                                                    <div className="col-12 titlesRow"> 
                                                     <div className={contractClass}>
                                                         <label>{contract.status}</label>
                                                     </div>
                                                     <div className="col-2 contractfield">
-                                                        { contract.status === 'pending' ? (
-                                                            <a className="cancelled" href="" onClick={(e)=>{e.preventDefault();this.markAccept(contract._id, 'rejected')}}>Reject</a>) : undefined
-                                                        }
-                                                        { contract.status === 'done' ? (
-                                                            
-                                                                <a className="accepted" href="" onClick={(e)=>{e.preventDefault(); this.setValidate(contract._id, contract.server._id, 'validated')}}>Validate</a>
-                                                            
-                                                            ) : undefined
-                                                        }
+                                                        { contract.status === 'pending' ? (<a className="cancelled" href="" onClick={(e)=>{e.preventDefault();this.markAccept(contract._id, 'rejected')}}>Reject</a>) : undefined }
+                                                        { contract.status === 'done' ? (<a className="accepted" href="" onClick={(e)=>{e.preventDefault(); this.setValidate(contract._id, contract.server._id, 'validated')}}>Validate</a>) : undefined }
                                                     </div>
                                                     <div className="col-4 contractfield" >    
                                                         <label>{contract.server.name}</label>
@@ -239,6 +229,7 @@ class Contracts extends Component {
                                     </form>
                                 </div>
                             </div>
+                            <div>&nbsp;</div>
                         </div>
                     </div>
                 </div>

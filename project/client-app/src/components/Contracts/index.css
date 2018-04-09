@@ -1,0 +1,38 @@
+.field {
+    color: white;
+    background-color: #1899AF;
+}
+
+.contractfield {
+    float: left;
+    text-align: center;
+}
+
+.titlesRow {
+    /* border: outset; */
+    border-style: solid;
+    border-color: grey;
+    border-width: 0px 0px 1px 0px;
+}
+
+a.accepted {
+    color: green;
+    margin-left: 5px;
+}
+  
+a.cancelled {
+    color: firebrick;
+    margin-left: 5px
+}
+  
+.validate {
+    height: 20px;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    background-color: yellow;
+}
