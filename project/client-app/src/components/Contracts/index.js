@@ -19,7 +19,8 @@ class Contracts extends Component {
             status: '',
             estimatedTime:0,
             investedTime:0,
-            validatedTime:0
+            validatedTime:0,
+            rowColor: 'col-12 titleRow green'
         }
     }
 
@@ -127,6 +128,8 @@ class Contracts extends Component {
     render() {
         return (
             <main>
+                <div>
+                    </div>
                 <div className="container">
                     <div className="row">
                         <div className="card-title section">
@@ -153,12 +156,15 @@ class Contracts extends Component {
                                                 </div>
                                             </div>
                                             {this.state.contractsServed.map(contract => {
+                                                // let rowColor = this.state.rowColor ===  'col-12 titleRow green' ? 'col-12 titleRow yellow' : 'col-12 titleRow greenn' // borrar??
+                                                // this.setState({rowColor})
                                                 let contractClass=''
                                                 if (contract.status === 'pending') contractClass='col-2 contractfield text-primary'
                                                 else if (contract.status === 'accepted' || contract.status === 'done' || 'validated') contractClass="col-2 contractfield text-success"
                                                 else if (contract.status === 'cancelled') contractClass="col-2 contractfield text-danger"
                                                 return (
-                                                    <div className="col-12 titlesRow"> 
+                                                    <div className="col-12 titlesRow">
+                                                    {/* <div className={this.state.rowColor}>  */}
                                                         <div className={contractClass}>
                                                             <label>{contract.status}</label>
                                                         </div>

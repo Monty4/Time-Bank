@@ -1,3 +1,4 @@
+# [![Skylab](docs/skylab-56.png)](http://www.skylabcoders.com/)
 # TIME'S BANK PROJECT
 ### A place to share our time and knowledge with other people.
 
@@ -23,12 +24,19 @@ The project consists of a place where users can share their time with other user
 
 ## TECHNOLOGIES
 
-- CSS FRAMEWORK: BOOTSRAP 4
+![HTML5,CSS3 and JS](docs/html5-css3-js.png)
+[![Bootstrap](docs/bootstrap.png)](http://getbootstrap.com/)
+[![React](docs/react.png)](https://facebook.github.io/react/)
+[![NodeJS](docs/nodejs.png)](https://nodejs.org/)
+[![MongoDB](docs/mongodb.png)](https://www.mongodb.com/)
+
+
+- HTML5, CSS3, BOOTSRAP 4
+- JS
 - Express
 - MongoDB
 - Node Server
 - REACT
-- REACT-ROUTER
 
 ## FLOW
 

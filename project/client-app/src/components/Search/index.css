@@ -25,6 +25,12 @@ header {
     height: 35px;
 }
 
+.searchField {
+    margin-top: 5px;
+    background-color: #E5FCC2;
+    padding: 0px;
+  }
+
 .button {
     margin-top: 5px;
     text-align: right;
