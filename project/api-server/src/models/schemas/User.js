@@ -24,19 +24,19 @@ const User = new Schema({
     services: [{
         type: ObjectId,
         ref: 'Service',
-        required: true
+        // required: true
     }],
     city: {
         type: String,
-        required: true
+        // required: true
     },
     borough: {
         type: String,
-        required: true
+        // required: true
     },
     email: {
         type: String,
-        required: true
+        // required: true
     },
     wallet: {
         type: Number,

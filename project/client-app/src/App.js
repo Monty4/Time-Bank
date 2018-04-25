@@ -8,6 +8,7 @@ import Home from './components/Home/index'
 import Search from './components/Search/index'
 import Datauser from './components/Datauser/index'
 import Contracts from './components/Contracts/index'
+import Footer from './components/Footer/index'
 
 import api from './api-client.js'
 
@@ -82,6 +83,7 @@ class TimebankApp extends Component {
             <Register setFormFields={this.setFormFields} />
           )} /> */}
           
+          <Footer />
         </div>
       </HashRouter>
       </div>

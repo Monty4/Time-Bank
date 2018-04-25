@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Redirect } from 'react-router-dom'
+// import { NavLink, Redirect } from 'react-router-dom'
 import swal from 'sweetalert2'
 import './index.css'
 
@@ -231,7 +231,7 @@ class Contracts extends Component {
                                     </form>
                                 </div>
                             </div>
-                            <div>&nbsp;</div>
+                            <div className="margin-bottom">&nbsp;</div>
                         </div>
                     </div>
                 </div>

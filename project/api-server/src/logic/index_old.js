@@ -22,18 +22,31 @@ function validateStringArrayProp(prop, arr) {
 
 const logic = {
     // New User
-    register(name, surname, username, email, password) {
-        // console.log(name, surname, username, email, password)
+    registerUser(name, surname, username, password, city, borough, email, serviceIds) {
         return Promise.resolve()
             .then(() => {
-                validateStringProps({ name, surname, username, email, password })
-                
+                validateStringProps({ name, surname, username, password, city, borough, email })
+                validateStringArrayProp('serviceIds', serviceIds)
+
                 return User.findOne({ username })
             })
             .then(user => {
                 if (user) throw Error('username already exists')
 
-                
+                return Service.find({ _id: { $in: serviceIds } })
+            })
+            .then(_services => {
+                if (!_services || _services.length !== serviceIds.length)
+                    throw Error(`service ids are not valid ${serviceIds}`)
+
+                const services = []
+
+                for (service of _services)
+                    services.push(service._id)
+
+                const user = new User({ name, surname, username, password, city, borough, email, services })
+
+                return user.save()
             })
             .then(user => user._id.toString())
     },
