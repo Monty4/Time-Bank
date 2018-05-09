@@ -82,6 +82,10 @@ class TimebankApp extends Component {
           {/* <Route path="/register" render={() => (
             <Register setFormFields={this.setFormFields} />
           )} /> */}
+
+          <Route path="/register" render={() => (
+            <Search />
+          )} />
           
           <Footer />
         </div>

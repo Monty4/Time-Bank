@@ -23,9 +23,9 @@ const api = {
     //     return this._call('post', 'register', { name, surname, username, password, services, city, borough, email })
     // },
 
-    register(name, surname, username, email, password) {
-        // console.log(name,surname,username,email,password)
-        return this._call('post', 'register', { name, surname, username, email, password })
+    register(name, surname, username, email, password, services, city, borough) {
+        console.log('register=>',{name, surname, username, email, password, services, city, borough})
+        return this._call('post', 'register', { name, surname, username, email, password, services, city, borough })
     },
 
     remove(id, username, password) {
@@ -57,6 +57,7 @@ const api = {
     },
 
     registercontract(service, server, client, status, estimatedTime, investedTime, validatedTime) {
+        // console.log('contract=>',service, server, client, status, estimatedTime, investedTime, validatedTime)
         return this._call('post', `registercontract`, { service, server, client, status, estimatedTime, investedTime, validatedTime})
     },
 

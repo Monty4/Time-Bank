@@ -6,3 +6,7 @@
 span {
     margin-right: 20px;
 }
+.swal2-popup .swal2-input, .swal2-popup .swal2-file, .swal2-popup .swal2-textarea {
+    width: 40%;
+    margin-right: 5px;
+}

@@ -22,21 +22,39 @@ function validateStringArrayProp(prop, arr) {
 
 const logic = {
     // New User
-    register(name, surname, username, email, password) {
-        // console.log(name, surname, username, email, password)
-        return Promise.resolve()
-            .then(() => {
-                validateStringProps({ name, surname, username, email, password })
+    // register(name, surname, username, email, password) {
+
+    //     return Promise.resolve()
+    //         .then(() => {
+    //             validateStringProps({ name, surname, username, email, password })
                 
-                return User.findOne({ username })
-            })
-            .then(user => {
-                if (user) throw Error('username already exists')
+    //             return User.findOne({ username })
+    //         })
+    //         .then(user => {
+    //             if (user) throw Error('username already exists')
 
                 
-            })
-            .then(user => user._id.toString())
+    //         })
+    //         // .then(user => user._id.toString())
+    //         .then(_user => {
+    //             const user = new User({'wallet': 0,'valuation': 0,name, surname, username,password,'city': '','borough':'', email })
+    //             return user.save()
+    //         })
+    // },
+
+
+    register( name, surname, username, email, password, services, city, borough ) {
+
+        return Promise.resolve()
+        .then(_user => {
+
+            const user = new User({ name, surname, username, email, password, services, city, borough })
+
+            return user.save()
+        })
     },
+
+    
 
     // List Filtered Users by Service, city and Borough
     listUsers(service, city, borough) {
@@ -105,6 +123,7 @@ const logic = {
 
     // New Contract HA DE SER MAKE CONTRAT
     registerContract ( service, server, client, status, estimatedTime, investedTime, validatedTime ) {
+        console.log('contract =>',service, server, client, status, estimatedTime, investedTime, validatedTime)
 
         return Promise.resolve()
         .then(_contract => {

@@ -24,6 +24,5 @@ router.get('/listuserreview/:user',listuserreviews)
 
 router.post('/registerreview', jsonBodyParser, registerreview)
 router.get('/review/:id', retrievereview)
-// router.put('/validaterewiew', jsonBodyParser, validaterewiew)
 
 module.exports = router

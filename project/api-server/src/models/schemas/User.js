@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema, Schema: { ObjectId } } = mongoose
 
-const Review = require('./Review')
+// const Review = require('./Review')
 
 const User = new Schema({
     name: {
@@ -23,20 +23,20 @@ const User = new Schema({
     },
     services: [{
         type: ObjectId,
-        ref: 'Service',
+        ref: 'Service'
         // required: true
     }],
     city: {
-        type: String,
+        type: String
         // required: true
     },
     borough: {
-        type: String,
+        type: String
         // required: true
     },
     email: {
         type: String,
-        // required: true
+        required: true
     },
     wallet: {
         type: Number,
@@ -45,6 +45,6 @@ const User = new Schema({
     valuation: {
         type: Number,
         default: 0
-    },
-    review: [Review]
+    }
+    // reviews: [Review]
 })
