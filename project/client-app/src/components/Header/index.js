@@ -12,8 +12,6 @@ class Header extends Component {
         super()
         this.state = {
             services: ['5ab18bf0f5ca252380467fcb'],
-            
-
             redirect: false
         }
     }
@@ -41,12 +39,11 @@ class Header extends Component {
                 "<input id='name' class='swal2-input' placeholder='Name' type='text'>" +
                 "<input id='surname' class='swal2-input' placeholder='Surname' type='text'>" +
                 "<input id='username' class='swal2-input' placeholder='Username' type='text'>" +
-                "<input id='email' class='swal2-input' placeholder='Email' type='text'>" +
+                "<input id='email' class='swal2-input' placeholder='Email' type='email'>" +
                 "<input id='password' class='swal2-input' placeholder='Password' type='password'>" +
                 "<input id='city' class='swal2-input' placeholder='City' type='text'>" +
                 "<input id='borough' class='swal2-input' placeholder='Borough' type='text'>" ,
                 
-
                 input: 'select',
                 inputId: 'service',
                 inputOptions: {
@@ -56,8 +53,7 @@ class Header extends Component {
                 },
                 inputPlaceholder: 'Select service',
                 showCancelButton: true,
-                
-                
+                                
             focusConfirm: false,
             preConfirm: () => {
                 return {
