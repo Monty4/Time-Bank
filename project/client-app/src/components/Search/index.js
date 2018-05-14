@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import { NavLink } from 'react-router-dom'
 import './index.css'
 
 import api from '../../api-client.js'
@@ -42,7 +41,7 @@ class Search extends Component {
     })
   }
 
-  componentWillMount() {
+  componentDidMount() {
     api.services().then(services => {
       this.setState({ services: services.data })
     })

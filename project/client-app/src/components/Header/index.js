@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import swal from 'sweetalert2'
 import api from '../../api-client.js'
+// import api from '../Services/api'
+import storage from '../Services/storage.js'
 
 import './index.css'
 import logo from '../../logo.png'
@@ -11,9 +13,19 @@ class Header extends Component {
     constructor() {
         super()
         this.state = {
-            services: ['5ab18bf0f5ca252380467fcb'],
-            redirect: false
+            services: [],
+            wallet: 0,
+            valuation: 0,
+            redirect: false,
+            loged: false,
+            user: []
         }
+    }
+
+    componentWillMount() {
+        (storage.getToken()) ? this.setState({ loged: true }) : this.setState({ loged: false })
+
+        api.listUser(storage.getToken()).then(res => res.data).then(user => this.setState({ user }))
     }
 
     swalLogin() {
@@ -30,6 +42,24 @@ class Header extends Component {
                 }
             }
         })
+        .then (res => {
+            api.login(res.value.username, res.value.password)
+            .then(result => {
+                if (result.status === 'OK') {
+                    this.props.history.push('/')
+                    storage.setToken(result.data.token)
+                    this.setState({ loged: true })
+                    api.listUser(storage.getToken()).then(res => res.data).then(user => {
+                        this.setState({ user })
+                    })
+                    this.setState({redirect:true})
+                }
+                else {
+                    console.log('Error, username and/or password wrong')
+                }
+            })
+        })
+        
     }
 
     swalRegister() {
@@ -42,17 +72,23 @@ class Header extends Component {
                 "<input id='email' class='swal2-input' placeholder='Email' type='email'>" +
                 "<input id='password' class='swal2-input' placeholder='Password' type='password'>" +
                 "<input id='city' class='swal2-input' placeholder='City' type='text'>" +
-                "<input id='borough' class='swal2-input' placeholder='Borough' type='text'>" ,
+                "<input id='borough' class='swal2-input' placeholder='Borough' type='text'>" +
+                "<select id='services' class='swal2-input'>" + 
+                "<option value='' disabled selected>Service</option>" + 
+                "<option value='5ab18bf0f5ca252380467fcb'>Mechanics</option>" + 
+                "<option value='5ab18d59f5ca252380467fcc'>Painting</option>" + 
+                "<option value='5ab3df89d27c623d0c741607'>Programmer</option>" + 
+                "</select>" ,
                 
-                input: 'select',
-                inputId: 'service',
-                inputOptions: {
-                    '5ab18bf0f5ca252380467fcb': 'Mechanics',
-                    '5ab18d59f5ca252380467fcc': 'Painting',
-                    '5ab3df89d27c623d0c741607': 'Programmer'
-                },
-                inputPlaceholder: 'Select service',
-                showCancelButton: true,
+                // input: 'select',
+                // inputId: 'service',
+                // inputOptions: {
+                //     '5ab18bf0f5ca252380467fcb': 'Mechanics',
+                //     '5ab18d59f5ca252380467fcc': 'Painting',
+                //     '5ab3df89d27c623d0c741607': 'Programmer'
+                // },
+                // inputPlaceholder: 'Select service',
+                // showCancelButton: true,
                                 
             focusConfirm: false,
             preConfirm: () => {
@@ -63,12 +99,13 @@ class Header extends Component {
                     email: document.getElementById('email').value,
                     password: document.getElementById('password').value,
                     city: document.getElementById('city').value,
-                    borough: document.getElementById('borough').value
+                    borough: document.getElementById('borough').value,
+                    services: document.getElementById('services').value
                 }
             }
         }).then (res => {
-            api.register(res.value.name, res.value.surname, res.value.username, res.value.email, res.value.password, this.state.services, res.value.city, res.value.borough)
-            .then(()=>this.setState({redirect:true}))
+            let service = res.value.services
+            api.register(res.value.name, res.value.surname, res.value.username, res.value.email, res.value.password, [service], res.value.city, res.value.borough, this.state.wallet, this.state.valuation)
         })
     }
 
@@ -99,12 +136,13 @@ class Header extends Component {
                         </div>
                     </div>
                 </nav>
-                {this.state.redirect 
+                {/* {( this.state.redirect === 'home') 
                 ?
-                <Redirect to='/search' />
+                <Redirect to='/' />
                 :
                 undefined
-                }
+                } */}
+                { this.state.redirect ? <Redirect to='/search' /> : undefined }
             </header>
         )
     }

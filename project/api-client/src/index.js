@@ -16,16 +16,25 @@ const api = {
         })
     },
 
+    login(username,password){
+        return this._call('post', 'login', {username,password})
+    },
+
+    listUsers(){
+        return this._call('get', 'users')
+    },
+
+    listUser(token){
+        return this._call('get', 'user', undefined, token)
+    },
+
     list(service, city, borough) {
         return this._call('get', 'users', undefined, { service, city, borough })
     },
-    // register(name, surname, username, password, services, city, borough, email) {
-    //     return this._call('post', 'register', { name, surname, username, password, services, city, borough, email })
-    // },
-
-    register(name, surname, username, email, password, services, city, borough) {
-        console.log('register=>',{name, surname, username, email, password, services, city, borough})
-        return this._call('post', 'register', { name, surname, username, email, password, services, city, borough })
+    
+    register(name, surname, username, email, password, services, city, borough, wallet, valuation) {
+        // console.log('register=>',{name, surname, username, email, password, services, city, borough})
+        return this._call('post', 'register', { name, surname, username, email, password, services, city, borough, wallet, valuation })
     },
 
     remove(id, username, password) {

@@ -21,6 +21,18 @@ function validateStringArrayProp(prop, arr) {
 }
 
 const logic = {
+    // User Login
+    verify(username,password){
+        return Promise.resolve()
+            .then(() => {
+                return User.findOne({ username, password }, {_id: 1, username: 1})
+            })
+            .then(user => {
+                if(!user) throw Error('username and/or password wrong')
+
+                return user
+            })
+    },
     // New User
     // register(name, surname, username, email, password) {
 
@@ -43,18 +55,16 @@ const logic = {
     // },
 
 
-    register( name, surname, username, email, password, services, city, borough ) {
+    register( name, surname, username, email, password, services, city, borough, wallet, valuation ) {
 
         return Promise.resolve()
         .then(_user => {
 
-            const user = new User({ name, surname, username, email, password, services, city, borough })
+            const user = new User({ name, surname, username, email, password, services, city, borough, wallet, valuation })
 
             return user.save()
         })
     },
-
-    
 
     // List Filtered Users by Service, city and Borough
     listUsers(service, city, borough) {
@@ -66,6 +76,11 @@ const logic = {
         return User.find(filter).then(result=>{
             return result
         })
+    },
+
+    // List User by Id
+    listUser(id){
+        return User.findOne({_id:id})
     },
 
     // Update User by ID
