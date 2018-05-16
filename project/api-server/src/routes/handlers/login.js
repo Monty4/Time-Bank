@@ -8,6 +8,7 @@ const { JWT_SECRET: secret } = process.env
 //const expiresIn = parseInt(expiration)
 
 module.exports = (req,res) => {
+
     const { body:{ username,password } } = req
 
     logic.verify(username,password)

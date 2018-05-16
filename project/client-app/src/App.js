@@ -11,6 +11,7 @@ import Contracts from './components/Contracts/index'
 import Footer from './components/Footer/index'
 
 import api from './api-client.js'
+// import storage from './components/Services/storage.js'
 
 class TimebankApp extends Component {
 
@@ -70,6 +71,15 @@ class TimebankApp extends Component {
           <Route path="/search" render={() => (
             <Search getList={this.getFilteredUsers} users={this.state.users} onClickUserId={this.setUserId} onClickUserName={this.setUserName} />
           )} />
+
+          {/* {
+          (storage.getToken()) ?
+          <Route path="/search" render={() => (
+            <Search getList={this.getFilteredUsers} users={this.state.users} onClickUserId={this.setUserId} onClickUserName={this.setUserName} />
+          )} />
+          :
+          undefined
+          } */}
 
           <Route path="/contracts" render={() => (
             <Contracts />

@@ -9,7 +9,7 @@ const jwtValidator = require('./handlers/jwtValidator')
 
 router.get('/user', jwtValidator, retrieve)
 
-// router.post('/login', jsonBodyParser, login)
+router.post('/login', jsonBodyParser, login)
 router.get('/users', list)
 router.get('/user/:id', retrieve)
 router.post('/register', jsonBodyParser, register)

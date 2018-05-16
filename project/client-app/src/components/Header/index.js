@@ -46,7 +46,6 @@ class Header extends Component {
             api.login(res.value.username, res.value.password)
             .then(result => {
                 if (result.status === 'OK') {
-                    this.props.history.push('/')
                     storage.setToken(result.data.token)
                     this.setState({ loged: true })
                     api.listUser(storage.getToken()).then(res => res.data).then(user => {
@@ -58,6 +57,9 @@ class Header extends Component {
                     console.log('Error, username and/or password wrong')
                 }
             })
+        })
+        .catch(err => {
+            console.log(err.message)
         })
         
     }
@@ -107,6 +109,16 @@ class Header extends Component {
             let service = res.value.services
             api.register(res.value.name, res.value.surname, res.value.username, res.value.email, res.value.password, [service], res.value.city, res.value.borough, this.state.wallet, this.state.valuation)
         })
+        .catch(err => {
+            console.log(err.message)
+        })
+    }
+    
+
+    logOut() {
+        // this.props.history.push('/')
+        storage.removeToken()
+        this.setState({ loged: false, redirect: false })
     }
 
     render() {
@@ -122,27 +134,36 @@ class Header extends Component {
                         </div>
                         
                         <div className="collapse navbar-collapse" id="myNavbar">
-                            <ul className="navbar-nav mr-auto navbar-left">
-                                <li><NavLink className="nav-link" to="/search">Search</NavLink></li>
-                                <li><NavLink className="nav-link" to="/contracts">Contracts</NavLink></li>
-                            </ul>
+                            {(this.state.loged)
+                                ?
+                                <ul className="navbar-nav mr-auto navbar-left">
+                                    <li><NavLink className="nav-link" to="/search">Search</NavLink></li>
+                                    <li><NavLink className="nav-link" to="/contracts">Contracts</NavLink></li>
+                                </ul>
+                                :
+                                undefined
+                            }
                         </div>
-
+                        
                         <div>
-                            <ul className="navbar-nav mr-auto navbar-right">
-                                <li><a href="" onClick={e => { e.preventDefault(); this.swalLogin() }}><span className="glyphicon glyphicon-log-in" /> Login</a></li>
-                                <li><a href="" onClick={e => { e.preventDefault(); this.swalRegister() }}><span className="glyphicon glyphicon-user" /> Register</a></li>
-                            </ul>
+                            {(this.state.loged)
+                                ?
+                                <ul className="navbar-nav mr-auto navbar-right">
+                                    <li><a href="" onClick={e => { e.preventDefault(); this.logOut() }}><span className="glyphicon glyphicon-user" /> Salir</a></li>
+                                </ul>
+                                :
+                                <ul className="navbar-nav mr-auto navbar-right">
+                                    <li><a href="" onClick={e => { e.preventDefault(); this.swalLogin() }}><span className="glyphicon glyphicon-log-in" /> Login</a></li>
+                                    <li><a href="" onClick={e => { e.preventDefault(); this.swalRegister() }}><span className="glyphicon glyphicon-user" /> Register</a></li>
+                                </ul>
+                            }
                         </div>
                     </div>
                 </nav>
-                {/* {( this.state.redirect === 'home') 
-                ?
-                <Redirect to='/' />
-                :
-                undefined
-                } */}
-                { this.state.redirect ? <Redirect to='/search' /> : undefined }
+                
+                {/* { this.state.redirect ? <Redirect to='/search' /> : undefined } */}
+                { (this.state.redirect && this.state.loged) ? <Redirect to='/search' /> : <Redirect to='/' /> }
+                
             </header>
         )
     }

@@ -13,6 +13,7 @@ const registerreview = require('./registerreview')
 const retrievereview = require('./retrievereview')
 const listuserreviews = require('./listuserreviews')
 const service = require('./service')
+const login = require('./login')
 
 module.exports = {
     list,
@@ -29,5 +30,6 @@ module.exports = {
     registerreview,
     retrievereview,
     service,
-    listuserreviews
+    listuserreviews,
+    login
 }
