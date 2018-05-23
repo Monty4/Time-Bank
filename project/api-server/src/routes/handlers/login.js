@@ -16,7 +16,7 @@ module.exports = (req,res) => {
             //const token = jwt.sign({ id: user._id }, secret, { expiresIn })
             const token = jwt.sign({ id: user._id }, secret)
 
-            res.json(success({ token }))
+            res.json(success({ token, user }))
         })
         .catch(err => {
             res.json(fail(err.message))

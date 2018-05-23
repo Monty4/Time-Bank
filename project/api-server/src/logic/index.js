@@ -69,17 +69,19 @@ const logic = {
     // List Filtered Users by Service, city and Borough
     listUsers(service, city, borough) {
         let filter = {}
-       
-        if (service) filter.services = service
+
+        // if (service) filter.services = service
+        if (service) filter.services = new ObjectId(service)
         if (city) filter.city = { $regex: new RegExp(city, 'i') }
         if (borough) filter.borough = { $regex: new RegExp(borough, 'i') }
+                
         return User.find(filter).then(result=>{
             return result
         })
     },
 
     // List User by Id
-    listUser(id){
+    listUser(id){       
         return User.findOne({_id:id})
     },
 

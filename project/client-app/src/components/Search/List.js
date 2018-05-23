@@ -8,7 +8,7 @@ class List extends Component {
     super(props)
     this.state = {
       id:'',
-      userData: '',
+      userData: ''
     }
   }
 

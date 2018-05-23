@@ -97,8 +97,8 @@ class Search extends Component {
             </div>
             <div className="card-group">
             {
-              (this.state.show && this.state.service) ? this.props.users.map(user => {
-                if (user._id !== '5ab41ba28971a93b24e8bb97') // Es el user Mario Montalban que se utiliza como cliente
+              (this.state.show && (this.state.service)) ? this.props.users.map(user => {
+                if (user._id !== '5af556d2264043001414fa52') // Es el user Mario Montalban que se utiliza como cliente
                 return <List key={user._id} user={user} service={this.state.service} />
               }): undefined
             }

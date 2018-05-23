@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import swal from 'sweetalert2'
 import api from '../../api-client.js'
-// import api from '../Services/api'
 import storage from '../Services/storage.js'
 
 import './index.css'
@@ -14,6 +13,8 @@ class Header extends Component {
         super()
         this.state = {
             services: [],
+            userid: '',
+            username: '',
             wallet: 0,
             valuation: 0,
             redirect: false,
@@ -21,6 +22,12 @@ class Header extends Component {
             user: []
         }
     }
+
+    componentDidMount() {
+        api.services().then(services => {
+          this.setState({ services: services.data })
+        })
+      }
 
     componentWillMount() {
         (storage.getToken()) ? this.setState({ loged: true }) : this.setState({ loged: false })
@@ -48,6 +55,8 @@ class Header extends Component {
                 if (result.status === 'OK') {
                     storage.setToken(result.data.token)
                     this.setState({ loged: true })
+                    this.setState({ userid: result.data.user._id})
+                    this.setState({ username: result.data.user.username})
                     api.listUser(storage.getToken()).then(res => res.data).then(user => {
                         this.setState({ user })
                     })
@@ -65,6 +74,10 @@ class Header extends Component {
     }
 
     swalRegister() {
+        let options = ''
+        this.state.services.map(service => {
+            options += "<option value='" + service._id + "'>" + service.title + "</option>"
+        })
         swal({
             title: 'Register',
             html:
@@ -77,20 +90,8 @@ class Header extends Component {
                 "<input id='borough' class='swal2-input' placeholder='Borough' type='text'>" +
                 "<select id='services' class='swal2-input'>" + 
                 "<option value='' disabled selected>Service</option>" + 
-                "<option value='5ab18bf0f5ca252380467fcb'>Mechanics</option>" + 
-                "<option value='5ab18d59f5ca252380467fcc'>Painting</option>" + 
-                "<option value='5ab3df89d27c623d0c741607'>Programmer</option>" + 
+                options +
                 "</select>" ,
-                
-                // input: 'select',
-                // inputId: 'service',
-                // inputOptions: {
-                //     '5ab18bf0f5ca252380467fcb': 'Mechanics',
-                //     '5ab18d59f5ca252380467fcc': 'Painting',
-                //     '5ab3df89d27c623d0c741607': 'Programmer'
-                // },
-                // inputPlaceholder: 'Select service',
-                // showCancelButton: true,
                                 
             focusConfirm: false,
             preConfirm: () => {
@@ -149,7 +150,8 @@ class Header extends Component {
                             {(this.state.loged)
                                 ?
                                 <ul className="navbar-nav mr-auto navbar-right">
-                                    <li><a href="" onClick={e => { e.preventDefault(); this.logOut() }}><span className="glyphicon glyphicon-user" /> Salir</a></li>
+                                    <li><a href="" onClick={e => { e.preventDefault(); this.logOut() }}><span className="glyphicon glyphicon-user" /> Logout {this.state.username}</a></li>
+                                    <li><span className="glyphicon glyphicon-user" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                                 </ul>
                                 :
                                 <ul className="navbar-nav mr-auto navbar-right">
