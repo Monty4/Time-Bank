@@ -23,11 +23,11 @@ class Search extends Component {
   }
 
   fillCity = (event) => {
-    this.setState({ city: event.target.value, show: ''})
+    this.setState({ city: event.target.value})
   }
 
   fillBorough = (event) => {
-    this.setState({ borough: event.target.value, show: ''})
+    this.setState({ borough: event.target.value})
   }
 
   submit = () => {
