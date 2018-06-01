@@ -125,7 +125,38 @@ class Header extends Component {
     render() {
         return (
             <header>
-                <nav className="navbar navbar-expand-sm navbar-light bg-light header-color">
+                <nav className="navbar navbar-expand-md navbar-light header-color">
+                    {/* <a class="navbar-brand" href="#">Navbar</a> */}
+                    <a class="navbar-brand" href=""><img src={logo} alt="" /></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <div className="left-menu col-6">
+                        <ul className="navbar-nav">
+                            <li><NavLink className="nav-link" to="/search">Search</NavLink></li>
+                            <li><NavLink className="nav-link" to="/contracts">Contracts</NavLink></li>
+                        </ul>
+                        </div>
+
+                        <div className="right-menu col-6">
+                            {(this.state.loged)
+                                ?
+                                <ul className="navbar-nav mr-auto navbar-right">
+                                    <li><a href="" onClick={e => { e.preventDefault(); this.logOut() }}><span className="glyphicon glyphicon-user" /> Logout {this.state.username}</a></li>
+                                    <li><span className="glyphicon glyphicon-user" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                                </ul>
+                                :
+                                <ul className="navbar-nav mr-auto navbar-right">
+                                    <li><a href="" onClick={e => { e.preventDefault(); this.swalLogin() }}><span className="glyphicon glyphicon-log-in" /> Login</a></li>
+                                    <li><a href="" onClick={e => { e.preventDefault(); this.swalRegister() }}><span className="glyphicon glyphicon-user" /> Register</a></li>
+                                </ul>
+                            }
+                        </div>
+                        
+                    </div>
+                </nav>
+                {/* <nav className="navbar navbar-expand-sm navbar-light bg-light header-color">
                     <div className="container-fluid">
                         <div className="navbar-header">
                         <a href=""><img src={logo} alt="" /></a>
@@ -161,7 +192,7 @@ class Header extends Component {
                             }
                         </div>
                     </div>
-                </nav>
+                </nav> */}
                 
                 {/* { this.state.redirect ? <Redirect to='/search' /> : undefined } */}
                 { (this.state.redirect && this.state.loged) ? <Redirect to='/search' /> : <Redirect to='/' /> }

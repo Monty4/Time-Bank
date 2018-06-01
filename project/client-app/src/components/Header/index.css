@@ -1,7 +1,15 @@
+header {
+    background-color:rgb(24, 153, 175);
+    height: 84px;
+    padding-left: 50px;
+    height: auto;
+}
+
 .header-color {
-    height: 60px;
+    /* height: 60px; */
     padding-left: 50px;
     padding-right: 50px;
+    background-color: #1899AF!important;
 }
 span {
     margin-right: 20px;
@@ -9,4 +17,12 @@ span {
 .swal2-popup .swal2-input, .swal2-popup .swal2-file, .swal2-popup .swal2-textarea {
     width: 40%;
     margin-right: 5px;
+}
+
+.left-menu {
+    float: left;
+}
+
+.right-menu {
+    float: right;
 }
